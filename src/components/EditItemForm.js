@@ -1,6 +1,6 @@
 import React from "react";
 
-function UpdateItemForm() {
+function EditItemForm() {
   return (
     <React.Fragment>
 
@@ -8,4 +8,4 @@ function UpdateItemForm() {
   );
 }
 
-export default UpdateItemForm;
+export default EditItemForm;

@@ -1,11 +1,11 @@
 import React from "react";
 
-function ItemsList() {
+function ItemDetail() {
   return (
     <React.Fragment>
-      <p>items list</p>
+
     </React.Fragment>
   );
 }
 
-export default ItemsList;
+export default ItemDetail;
