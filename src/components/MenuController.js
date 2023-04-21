@@ -60,7 +60,7 @@ class MenuController extends React.Component {
         this.state.selectedItem !== null ?
           <React.Fragment>
             <ItemDetail item={ this.state.selectedItem }/>
-            <button onclick={ this.handleReturningToList }>Return to Bean List</button>
+            <button onClick={ this.handleReturningToList }>Return to Bean List</button>
           </React.Fragment>
         :
         this.state.newItemFormVisible ?
