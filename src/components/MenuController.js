@@ -72,12 +72,13 @@ class MenuController extends React.Component {
   }
 
   handleBuyingClick = (quantityPurchased) => {
-    const newItemsList = [...this.state.itemsList];
+    const indexSelectedItem = this.state.itemsList.indexOf(this.state.selectedItem);
     const updatedQuantity = parseInt(this.state.selectedItem.quantity) - quantityPurchased;
-    const updatedItem = { ...this.state.selectedItem, ...{ quantity: updatedQuantity } };
-
-    this.state.itemsList
-            .splice(this.state.itemsList.indexOf(this.state.selectedItem), 1, updatedItem);
+    const updatedItem = [{ [indexSelectedItem]: { ...this.state.selectedItem, ...{ quantity: updatedQuantity } }}];
+    const newItemsList = {...this.state.itemsList, ...updatedItem};
+    console.log(this.state.itemsList);
+    console.log(updatedItem);
+    console.log("newItemsList");
     console.log(newItemsList);
     this.setState({
       itemsList: newItemsList
@@ -85,6 +86,7 @@ class MenuController extends React.Component {
   }
 
   render() {
+    console.log(this.state.itemsList);
     return (
       <React.Fragment>
         <Header />
