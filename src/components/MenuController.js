@@ -41,7 +41,7 @@ class MenuController extends React.Component {
           </React.Fragment>
         :
           <React.Fragment>
-            <ItemsList />
+            <ItemsList itemsList={ this.state.itemsList } />
           </React.Fragment>
         }
       </React.Fragment>
