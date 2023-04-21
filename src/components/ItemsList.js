@@ -7,6 +7,7 @@ function ItemsList(props) {
     <React.Fragment>
       {props.itemsList.map(item => 
         <Item 
+          whenItemClicked={props.onItemSelection}
           name={item.name}
           origin={item.origin}
           roast={item.roast}
@@ -22,7 +23,8 @@ function ItemsList(props) {
 }
 
 ItemsList.propTypes = {
-  itemsList: PropTypes.array
+  itemsList: PropTypes.array,
+  onItemSelection: PropTypes.func
 };
 
 export default ItemsList;

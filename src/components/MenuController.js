@@ -33,6 +33,19 @@ class MenuController extends React.Component {
     });
   }
 
+  handleChangingSelectedItem = (itemId) => {
+    const newSelectedItem = this.state.itemsList.filter(item => item.id === itemId)[0];
+    this.setState({
+      selectedItem: newSelectedItem
+    });
+  }
+
+  handleReturningToList = () => {
+    this.setState({
+      selectedItem: null
+    })
+  }
+
   render() {
 
     return (
@@ -46,7 +59,8 @@ class MenuController extends React.Component {
         :
         this.state.selectedItem !== null ?
           <React.Fragment>
-            <ItemDetail />
+            <ItemDetail item={ this.state.selectedItem }/>
+            <button onclick={ this.handleReturningToList }>Return to Bean List</button>
           </React.Fragment>
         :
         this.state.newItemFormVisible ?
@@ -56,7 +70,8 @@ class MenuController extends React.Component {
           </React.Fragment>
         :
           <React.Fragment>
-            <ItemsList itemsList={ this.state.itemsList } />
+            <ItemsList itemsList={ this.state.itemsList } 
+                       onItemSelection={ this.handleChangingSelectedItem } />
             <button onClick={ this.handleClick }>Add New Bean</button>
           </React.Fragment>
         }

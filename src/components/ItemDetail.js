@@ -1,6 +1,6 @@
 import React from "react";
 
-function ItemDetail() {
+function ItemDetail(props) {
   return (
     <React.Fragment>
 

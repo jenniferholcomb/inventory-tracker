@@ -12,15 +12,16 @@ function Item(props) {
   
   return (
     <React.Fragment>
-      <h1>{props.name}</h1>
-      <p>{quantityNotification}</p>
-      <p>ORIGIN: {props.origin}</p>
-      <p>ROAST: {props.roast}</p>
-      <p>DESCRIPTION: </p>
-      <blockquote>{props.description}</blockquote>
-      <p>PRICE: ${props.price} / lb</p>
-      <p>QUANTITY AVAILABLE: {props.quantity} pounds</p>
-
+      <div onClick = {() => props.whenItemClicked(props.id)}>
+        <h1>{props.name}</h1>
+        <p>{quantityNotification}</p>
+        <p>ORIGIN: {props.origin}</p>
+        <p>ROAST: {props.roast}</p>
+        <p>DESCRIPTION: </p>
+        <blockquote>{props.description}</blockquote>
+        <p>PRICE: ${props.price} / lb</p>
+        <p>QUANTITY AVAILABLE: {props.quantity} pounds</p>
+      </div>
       <hr />
     </React.Fragment>
   );
@@ -35,6 +36,7 @@ Item.propTypes = {
   quantity: PropTypes.number,
   id: PropTypes.string,
   key: PropTypes.string,
+  whenItemClicked: PropTypes.func
 }
 
 export default Item;
