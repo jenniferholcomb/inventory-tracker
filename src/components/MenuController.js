@@ -62,13 +62,26 @@ class MenuController extends React.Component {
   }
 
   handleEditingItem = (editedItem) => {
-    console.log("here");
     const editedItemsList = this.state.itemsList
             .filter(item => item.id !== this.state.selectedItem.id)
             .concat(editedItem);
     this.setState({
       itemsList: editedItemsList,
       editItemFormVisible: false
+    });
+  }
+
+  handleBuyingClick = (quantityPurchased) => {
+
+    const updatedQuantity = this.state.itemsList
+            .filter(item => item.id === this.state.selectedItem.id)[0]
+            .quantity - quantityPurchased;
+    console.log(updatedQuantity);
+    const updatedItem = { quantity: updatedQuantity };
+    const newItemsList = { ...this.state.selectedItem, ...updatedItem };
+    console.log(newItemsList);
+    this.setState({
+      itemLists: newItemsList
     });
   }
 
@@ -89,7 +102,8 @@ class MenuController extends React.Component {
           <React.Fragment>
             <ItemDetail item={ this.state.selectedItem }
                         onClickingDelete={ this.handleDeletingItem }
-                        onClickingEdit={ this.handleEditClick } />
+                        onClickingEdit={ this.handleEditClick } 
+                        onBuyingItem={ this.handleBuyingClick } />
             <button onClick={ this.handleReturningToList }>Return to Bean List</button>
           </React.Fragment>
         :
