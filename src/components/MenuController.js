@@ -25,6 +25,12 @@ class MenuController extends React.Component {
     }));
   }
 
+  handleEditClick = () => {
+    this.setState({
+      editItemFormVisible: true
+    });
+  }
+
   handleAddingNewItem = (newItem) => {
     const newItemsList = this.state.itemsList.concat(newItem);
     this.setState({
@@ -61,7 +67,8 @@ class MenuController extends React.Component {
             .filter(item => item.id !== this.state.selectedItem.id)
             .concat(editedItem);
     this.setState({
-      itemsList: editedItemsList
+      itemsList: editedItemsList,
+      editItemFormVisible: false
     });
   }
 
@@ -73,14 +80,16 @@ class MenuController extends React.Component {
         { 
         this.state.editItemFormVisible ?
           <React.Fragment>
-            <EditItemForm />
+            <EditItemForm item={ this.state.selectedItem }
+                          onEditingItem={ this.handleEditingItem } />
+            <button onClick={ this.handleClick }>Return to Bean List</button>
           </React.Fragment>
         :
         this.state.selectedItem !== null ?
           <React.Fragment>
             <ItemDetail item={ this.state.selectedItem }
                         onClickingDelete={ this.handleDeletingItem }
-                        onClickingEdit={ this.handleEditingItem } />
+                        onClickingEdit={ this.handleEditClick } />
             <button onClick={ this.handleReturningToList }>Return to Bean List</button>
           </React.Fragment>
         :
