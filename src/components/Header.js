@@ -1,11 +1,21 @@
 import React from "react";
+import PropTypes from 'prop-types';
 
-function Header() {
+function Header(props) {
   return (
     <React.Fragment>
-      <h1>Boutique Beans</h1>
+      <header>
+        <h1>Boutique Beans</h1>
+        <div className="inventory-widget">
+          {props.widgetAreaComponent}
+        </div>
+      </header>
     </React.Fragment>
   );
 }
+
+Header.propTypes = {
+  widgetAreaComponent: PropTypes.object
+};
 
 export default Header;

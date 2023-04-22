@@ -4,7 +4,7 @@ import EditItemForm from "./EditItemForm";
 import ItemDetail from "./ItemDetail";
 import NewItemForm from "./NewItemForm";
 import ItemsList from "./ItemsList";
-// import Inventory from "./Inventory";
+import InventoryWidget from "./InventoryWidget";
 import { v4 } from 'uuid';
 
 class MenuController extends React.Component {
@@ -62,9 +62,9 @@ class MenuController extends React.Component {
   }
 
   handleEditingItem = (editedItem) => {
-    const editedItemsList = this.state.itemsList
-            .filter(item => item.id !== this.state.selectedItem.id)
-            .concat(editedItem);
+    const indexSelectedItem = this.state.itemsList.indexOf(this.state.selectedItem);
+    const editedItemsList = this.state.itemsList;
+    editedItemsList.splice(indexSelectedItem, 1, editedItem);
     this.setState({
       itemsList: editedItemsList,
       editItemFormVisible: false
@@ -74,10 +74,10 @@ class MenuController extends React.Component {
   handleBuyingClick = (quantityPurchased) => {
     const indexSelectedItem = this.state.itemsList.indexOf(this.state.selectedItem);
     const updatedQuantity = parseInt(this.state.selectedItem.quantity) - quantityPurchased;
-    const updatedItem = [{ [indexSelectedItem]: { ...this.state.selectedItem, ...{ quantity: updatedQuantity } }}];
-    const newItemsList = {...this.state.itemsList, ...updatedItem};
-    console.log(this.state.itemsList);
-    console.log(updatedItem);
+    const updatedItem = { ...this.state.selectedItem, ...{ quantity: updatedQuantity } };
+    const newItemsList = this.state.itemsList;
+    newItemsList.splice(indexSelectedItem, 1, updatedItem);
+
     console.log("newItemsList");
     console.log(newItemsList);
     this.setState({
@@ -89,7 +89,8 @@ class MenuController extends React.Component {
     console.log(this.state.itemsList);
     return (
       <React.Fragment>
-        <Header />
+        <Header widgetAreaComponent=
+        { <InventoryWidget itemsList={ this.state.itemsList }/> }/>
         { 
         this.state.editItemFormVisible ?
           <React.Fragment>
