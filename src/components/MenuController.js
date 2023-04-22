@@ -15,6 +15,7 @@ class MenuController extends React.Component {
       newItemFormVisible: false,
       editItemFormVisible: false,
       selectedItem: null,
+      cartItems: [],
       itemsList: [ { name: 'Arabica', origin: 'Colombia', roast: 'medium', description: 'Our Arabica beans produce the highest-quality coffee, smooth and sweet with complex and intricate flavor undertones that may include fruit, sugar or chocolate. They will usually contain just enough acidity and very little bitterness.', price: 15, quantity: 130, id: v4() }, { name: 'Robusta', origin: 'Brazil', roast: 'dark', description: 'Robusta coffee is stronger with a heavier body. It has a slight-bitter taste, but still smooth and robust with a fragrant aroma. It\'s deep flavor profile stands up well to creamer, milk, sugar, and other added ingredients. When used to make Italian espresson, the beans produce a rich and thick crema.', price: 14, quantity: 130, id: v4() }, { name: 'Liberica', origin: 'Phillipines', roast: 'light', description: 'A less caffeinated bean, with a nutty bold taste, and a floral aroma. It\'s unique profile is suited to those looking for a lighter cup of coffee, but enjoy the unique flavor notes this been produces. ', price: 17, quantity: 130, id: v4() }, { name: 'Excelsa', origin: 'India', roast: 'light', description: 'Our excelsa beans have a tart, fruity flavor for a light roast, but with additional notes that are more like those you\'d find in a dark roast. This exceptional bean is a rare treat, many feel it produces the tastiest of cup of coffee.', price: 21, quantity: 130, id: v4() } ]
     };
   }
@@ -62,35 +63,37 @@ class MenuController extends React.Component {
   }
 
   handleEditingItem = (editedItem) => {
-    const indexSelectedItem = this.state.itemsList.indexOf(this.state.selectedItem);
-    const editedItemsList = this.state.itemsList;
-    editedItemsList.splice(indexSelectedItem, 1, editedItem);
+    const newItemsList = [...this.state.itemsList];
+    const index = this.state.itemsList.indexOf(this.state.selectedItem);
+    newItemsList.splice(index, 1, editedItem);
+    const currentItem = newItemsList[index];
+
     this.setState({
-      itemsList: editedItemsList,
+      itemsList: newItemsList,
+      selectedItem: currentItem,
       editItemFormVisible: false
     });
   }
 
   handleBuyingClick = (quantityPurchased) => {
-    const indexSelectedItem = this.state.itemsList.indexOf(this.state.selectedItem);
-    const updatedQuantity = parseInt(this.state.selectedItem.quantity) - quantityPurchased;
-    const updatedItem = { ...this.state.selectedItem, ...{ quantity: updatedQuantity } };
-    const newItemsList = this.state.itemsList;
-    newItemsList.splice(indexSelectedItem, 1, updatedItem);
+    const purchasedItem = this.state.itemsList.filter(item => item.id === this.state.selectedItem.id)[0];
+    purchasedItem.quantity -= quantityPurchased;
+    const newItemsList = [...this.state.itemsList];
+    const index = this.state.itemsList.indexOf(this.state.selectedItem);
+    newItemsList.splice(index, 1, purchasedItem);
 
-    console.log("newItemsList");
-    console.log(newItemsList);
+    // const newCart = [...this.state.cartItems];
+    // newCart.push(9);
     this.setState({
       itemsList: newItemsList
     });
   }
 
   render() {
-    console.log(this.state.itemsList);
     return (
       <React.Fragment>
         <Header widgetAreaComponent=
-        { <InventoryWidget itemsList={ this.state.itemsList }/> }/>
+          { <InventoryWidget itemsList={ this.state.itemsList }/> }/>
         { 
         this.state.editItemFormVisible ?
           <React.Fragment>

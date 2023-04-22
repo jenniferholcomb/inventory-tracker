@@ -12,6 +12,11 @@ code {
     monospace;
 }
 
+header {
+  display: flex;
+  justify-content: space-between;
+}
+
 .inventory-widget {
   float: right;
 }

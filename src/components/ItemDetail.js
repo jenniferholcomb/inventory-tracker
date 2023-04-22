@@ -31,6 +31,7 @@ function ItemDetail(props) {
         <button onClick={onClickingEdit}>Edit Bean</button>
         <button onClick={() => onClickingDelete(item.id)}>Delete Bean</button>
         <button onClick={() => onBuyingItem(1)}>Buy 1 pound</button>
+       
       </div>
     </React.Fragment>
   );
