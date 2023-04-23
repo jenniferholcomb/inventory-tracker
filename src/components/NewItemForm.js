@@ -14,6 +14,7 @@ function NewItemForm(props) {
       description: event.target.description.value,
       price: event.target.price.value,
       quantity: 130,
+      notification: '',
       id: v4()
     })
   }

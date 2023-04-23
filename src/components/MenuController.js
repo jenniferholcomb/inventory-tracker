@@ -15,8 +15,8 @@ class MenuController extends React.Component {
       newItemFormVisible: false,
       editItemFormVisible: false,
       selectedItem: null,
-      cartItems: [],
-      itemsList: [ { name: 'Arabica', origin: 'Colombia', roast: 'medium', description: 'Our Arabica beans produce the highest-quality coffee, smooth and sweet with complex and intricate flavor undertones that may include fruit, sugar or chocolate. They will usually contain just enough acidity and very little bitterness.', price: 15, quantity: 130, id: v4() }, { name: 'Robusta', origin: 'Brazil', roast: 'dark', description: 'Robusta coffee is stronger with a heavier body. It has a slight-bitter taste, but still smooth and robust with a fragrant aroma. It\'s deep flavor profile stands up well to creamer, milk, sugar, and other added ingredients. When used to make Italian espresson, the beans produce a rich and thick crema.', price: 14, quantity: 130, id: v4() }, { name: 'Liberica', origin: 'Phillipines', roast: 'light', description: 'A less caffeinated bean, with a nutty bold taste, and a floral aroma. It\'s unique profile is suited to those looking for a lighter cup of coffee, but enjoy the unique flavor notes this been produces. ', price: 17, quantity: 130, id: v4() }, { name: 'Excelsa', origin: 'India', roast: 'light', description: 'Our excelsa beans have a tart, fruity flavor for a light roast, but with additional notes that are more like those you\'d find in a dark roast. This exceptional bean is a rare treat, many feel it produces the tastiest of cup of coffee.', price: 21, quantity: 130, id: v4() } ]
+      // cartItems: [],
+      itemsList: [ { name: 'Arabica', origin: 'Colombia', roast: 'medium', description: 'Our Arabica beans produce the highest-quality coffee, smooth and sweet with complex and intricate flavor undertones that may include fruit, sugar or chocolate. They will usually contain just enough acidity and very little bitterness.', price: 15, quantity: 130, notification: '', id: v4() }, { name: 'Robusta', origin: 'Brazil', roast: 'dark', description: 'Robusta coffee is stronger with a heavier body. It has a slight-bitter taste, but still smooth and robust with a fragrant aroma. It\'s deep flavor profile stands up well to creamer, milk, sugar, and other added ingredients. When used to make Italian espresson, the beans produce a rich and thick crema.', price: 14, quantity: 130, notification: "", id: v4() }, { name: 'Liberica', origin: 'Phillipines', roast: 'light', description: 'A less caffeinated bean, with a nutty bold taste, and a floral aroma. It\'s unique profile is suited to those looking for a lighter cup of coffee, but enjoy the unique flavor notes this been produces. ', price: 17, quantity: 130, notification: "", id: v4() }, { name: 'Excelsa', origin: 'India', roast: 'light', description: 'Our excelsa beans have a tart, fruity flavor for a light roast, but with additional notes that are more like those you\'d find in a dark roast. This exceptional bean is a rare treat, many feel it produces the tastiest of cup of coffee.', price: 21, quantity: 130, notification: "", id: v4() } ]
     };
   }
 
@@ -49,7 +49,8 @@ class MenuController extends React.Component {
 
   handleReturningToList = () => {
     this.setState({
-      selectedItem: null
+      selectedItem: null,
+      editItemFormVisible: false
     });
   }
 
@@ -76,16 +77,22 @@ class MenuController extends React.Component {
   }
 
   handleBuyingClick = (quantityPurchased) => {
+    console.log(quantityPurchased);
     const purchasedItem = this.state.itemsList.filter(item => item.id === this.state.selectedItem.id)[0];
     purchasedItem.quantity -= quantityPurchased;
     const newItemsList = [...this.state.itemsList];
     const index = this.state.itemsList.indexOf(this.state.selectedItem);
     newItemsList.splice(index, 1, purchasedItem);
 
+    purchasedItem.notification = (purchasedItem.quantity < 1) ? "OUT OF STOCK" :
+    (purchasedItem.quantity <= 10) ? "ALMOST SOLD OUT!" : "" ;
+
+
     // const newCart = [...this.state.cartItems];
     // newCart.push(9);
     this.setState({
-      itemsList: newItemsList
+      itemsList: newItemsList,
+      selectedItem: null
     });
   }
 
@@ -99,7 +106,9 @@ class MenuController extends React.Component {
           <React.Fragment>
             <EditItemForm item={ this.state.selectedItem }
                           onEditingItem={ this.handleEditingItem } />
-            <button onClick={ this.handleClick }>Return to Bean List</button>
+            <div className="returnButton">
+              <button onClick={ this.handleReturningToList }>Return to Bean List</button>
+            </div>
           </React.Fragment>
         :
         this.state.selectedItem !== null ?
@@ -107,20 +116,28 @@ class MenuController extends React.Component {
             <ItemDetail item={ this.state.selectedItem }
                         onClickingDelete={ this.handleDeletingItem }
                         onClickingEdit={ this.handleEditClick } 
-                        onBuyingItem={ this.handleBuyingClick } />
-            <button onClick={ this.handleReturningToList }>Return to Bean List</button>
+                        onBuyingItem={ this.handleBuyingClick } 
+                        onQuantityCreation={ this.handleBuyingClick } />
+            <div className="returnButton">
+              <button onClick={ this.handleReturningToList }>Return to Bean List</button>
+            </div>
           </React.Fragment>
         :
         this.state.newItemFormVisible ?
           <React.Fragment>
             <NewItemForm onNewItemCreation={ this.handleAddingNewItem } />
-            <button onClick={ this.handleClick }>Return to Bean List</button>
+            <div className="returnButton">
+              <button onClick={ this.handleClick }>Return to Bean List</button>
+            </div>
           </React.Fragment>
         :
           <React.Fragment>
+            <div className="addButton">
+              <button onClick={ this.handleClick }>Add New Bean</button>
+            </div>
             <ItemsList itemsList={ this.state.itemsList } 
                        onItemSelection={ this.handleChangingSelectedItem } />
-            <button onClick={ this.handleClick }>Add New Bean</button>
+
           </React.Fragment>
         }
       </React.Fragment>

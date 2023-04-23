@@ -5,6 +5,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: bisque;
+  
 }
 
 code {
@@ -15,8 +17,71 @@ code {
 header {
   display: flex;
   justify-content: space-between;
+  background-color: rgb(52, 36, 29);
+  color: wheat;
+  padding: 1rem;
 }
 
 .inventory-widget {
   float: right;
 }
+
+#container-items-list {
+
+  display: flex;
+  /* align-items: center; */
+  flex-flow: row wrap;
+  justify-content: space-evenly;
+  /* flex: 6; */
+}
+
+#itemCard {
+  margin-top: 1rem;
+  /* margin-left: 1rem; */
+  width: 350px;
+  height: 425px;
+  border: 6px solid white;
+  box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.25);
+  border-radius: 15px;
+  padding: 0.65rem;
+  background-color: #F9F6F4;
+  overflow: scroll;
+}
+
+#itemCard:hover {
+  transform: scale(1.04);
+  transition: all 0.5s ease;
+  background-color: rgba(85, 83, 83, 0.15);
+}
+
+.details {
+  padding: 3rem;
+  /* display: flex; */
+
+}
+
+blockquote {
+  width: 500px;
+}
+
+
+
+button {
+  width: 150px;
+  height: 50px;
+  border-radius: 5px;
+}
+
+.addButton {
+  padding: 2rem;
+}
+
+.returnButton {
+  padding: 2rem;
+}
+
+.formSubmission {
+  padding: 2rem;
+}
+
+
