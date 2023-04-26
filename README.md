@@ -16,7 +16,7 @@
 * npm
 * dotenv
 
-### This application allows a user to track inventory of their coffee beans. User has CRUD capability of bean selection. A widget displays current inventory of all beans. As user buys beans, widget updates to currently available inventory.
+#### This application allows a user to track inventory of their coffee beans. User has CRUD capability of bean selection. A widget displays current inventory of all beans. As user buys beans, widget updates to currently available inventory.
 
 ## Component Diagram for application
 ![alt](src/img/inventory-component-diagram.png "component-diagram")
