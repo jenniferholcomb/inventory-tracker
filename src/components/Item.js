@@ -13,15 +13,17 @@ function Item(props) {
   return (
     <React.Fragment>
       <div id="itemCard">
-        <div onClick = {() => props.whenItemClicked(props.id)}>
-          <h1>{props.name}</h1>
-          <p>{quantityNotification}</p>
-          <p>ORIGIN: {props.origin}</p>
-          <p>ROAST: {props.roast}</p>
-          <p>DESCRIPTION: </p>
-          <blockquote>{props.description}</blockquote>
-          <p>PRICE: ${props.price} / lb</p>
-          <p>QUANTITY AVAILABLE: {props.quantity} pounds</p>
+        <div id="innerCard">
+          <div onClick = {() => props.whenItemClicked(props.id)}>
+            <h1>{props.name}</h1>
+            <p>{quantityNotification}</p>
+            <p>ORIGIN: {props.origin}</p>
+            <p>ROAST: {props.roast}</p>
+            <p>DESCRIPTION: </p>
+            <blockquote>{props.description}</blockquote>
+            <p>PRICE: ${props.price} / lb</p>
+            <p>QUANTITY AVAILABLE: {props.quantity} pounds</p>
+          </div>
         </div>
         <hr />
       </div>

@@ -5,7 +5,7 @@ function Header(props) {
   return (
     <React.Fragment>
       <header>
-        <h1>Boutique Beans</h1>
+        <h1 id="header"><strong>BOUTIQUE BEANS</strong></h1> 
         <div className="inventory-widget">
           {props.widgetAreaComponent}
         </div>
