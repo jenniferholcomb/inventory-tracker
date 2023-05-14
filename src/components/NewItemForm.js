@@ -21,8 +21,11 @@ function NewItemForm(props) {
 
   return (
     <React.Fragment>
+      <div className="formCard">
       <ReusableForm formSubmissionHandler={ handleNewItemFormSubmission } 
-                    buttonText="Add Bean" />
+                    buttonText="Add Bean" 
+                    headerText="UPDATE BEAN" />
+      </div>
     </React.Fragment>
   );
 }

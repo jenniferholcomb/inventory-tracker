@@ -16,7 +16,7 @@ class MenuController extends React.Component {
       editItemFormVisible: false,
       selectedItem: null,
       // cartItems: [],
-      itemsList: [ { name: 'Arabica', origin: 'Colombia', roast: 'medium', description: 'Our Arabica beans produce the highest-quality coffee, smooth and sweet with complex and intricate flavor undertones that may include fruit, sugar or chocolate. They will usually contain just enough acidity and very little bitterness.', price: 15, quantity: 130, notification: '', id: v4() }, { name: 'Robusta', origin: 'Brazil', roast: 'dark', description: 'Robusta coffee is stronger with a heavier body. It has a slight-bitter taste, but still smooth and robust with a fragrant aroma. It\'s deep flavor profile stands up well to creamer, milk, sugar, and other added ingredients. When used to make Italian espresson, the beans produce a rich and thick crema.', price: 14, quantity: 130, notification: "", id: v4() }, { name: 'Liberica', origin: 'Phillipines', roast: 'light', description: 'A less caffeinated bean, with a nutty bold taste, and a floral aroma. It\'s unique profile is suited to those looking for a lighter cup of coffee, but enjoy the unique flavor notes this been produces. ', price: 17, quantity: 130, notification: "", id: v4() }, { name: 'Excelsa', origin: 'India', roast: 'light', description: 'Our excelsa beans have a tart, fruity flavor for a light roast, but with additional notes that are more like those you\'d find in a dark roast. This exceptional bean is a rare treat, many feel it produces the tastiest of cup of coffee.', price: 21, quantity: 130, notification: "", id: v4() } ]
+      itemsList: [ { name: 'Arabica', origin: 'Colombia', roast: 'medium', description: 'Our Arabica beans produce the highest-quality coffee, smooth and sweet with complex and intricate flavor undertones that may include fruit, sugar or chocolate. They will usually contain just enough acidity and very little bitterness.', price: 15, quantity: 130, notification: '', id: v4() }, { name: 'Robusta', origin: 'Brazil', roast: 'dark', description: 'Robusta coffee is stronger with a heavier body. It has a slight-bitter taste, but still smooth and robust with a fragrant aroma. It\'s deep flavor profile stands up well to creamer, milk, sugar, and other added ingredients.', price: 14, quantity: 130, notification: "", id: v4() }, { name: 'Liberica', origin: 'Phillipines', roast: 'light', description: 'A less caffeinated bean, with a nutty bold taste, and a floral aroma. It\'s unique profile is suited to those looking for a lighter cup of coffee, but enjoy the unique flavor notes this been produces. ', price: 17, quantity: 130, notification: "", id: v4() }, { name: 'Excelsa', origin: 'India', roast: 'light', description: 'Our excelsa beans have a tart, fruity flavor for a light roast, but with additional notes that are more like those you\'d find in a dark roast. This exceptional bean is a rare treat, many feel it produces the tastiest of cup of coffee.', price: 21, quantity: 130, notification: "", id: v4() } ]
     };
   }
 
@@ -104,10 +104,12 @@ class MenuController extends React.Component {
         { 
         this.state.editItemFormVisible ?
           <React.Fragment>
-            <EditItemForm item={ this.state.selectedItem }
-                          onEditingItem={ this.handleEditingItem } />
-            <div className="returnButton">
-              <button onClick={ this.handleReturningToList }>Return to Bean List</button>
+            <div className="form">
+              <div className="returnButton">
+                <button onClick={ this.handleReturningToList }>Return to Bean List</button>
+              </div>
+              <EditItemForm item={ this.state.selectedItem }
+                            onEditingItem={ this.handleEditingItem } />
             </div>
           </React.Fragment>
         :
@@ -125,9 +127,11 @@ class MenuController extends React.Component {
         :
         this.state.newItemFormVisible ?
           <React.Fragment>
-            <NewItemForm onNewItemCreation={ this.handleAddingNewItem } />
+            <div className="form">
             <div className="returnButton">
-              <button onClick={ this.handleClick }>Return to Bean List</button>
+                <button onClick={ this.handleClick }>Return to Bean List</button>
+              </div>
+              <NewItemForm onNewItemCreation={ this.handleAddingNewItem } />
             </div>
           </React.Fragment>
         :

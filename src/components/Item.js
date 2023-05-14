@@ -1,4 +1,5 @@
 import React from "react";
+import lineArt from "./../img/lines.svg"
 import PropTypes from 'prop-types';
 
 function Item(props) {
@@ -11,23 +12,22 @@ function Item(props) {
     : "";
   
   return (
-    <React.Fragment>
-      <div id="itemCard">
-        <div id="innerCard">
-          <div onClick = {() => props.whenItemClicked(props.id)}>
+    <div onClick = {() => props.whenItemClicked(props.id)}>
+    <div className="itemCard">
+      <img  className="" src={lineArt}/> 
+          <div className="content">
             <h1>{props.name}</h1>
             <p>{quantityNotification}</p>
-            <p>ORIGIN: {props.origin}</p>
-            <p>ROAST: {props.roast}</p>
-            <p>DESCRIPTION: </p>
+            <p><strong>ORIGIN:</strong> {props.origin}</p>
+            <p><strong>ROAST:</strong> {props.roast}</p>
+            <p><strong>DESCRIPTION:</strong> </p>
             <blockquote>{props.description}</blockquote>
-            <p>PRICE: ${props.price} / lb</p>
-            <p>QUANTITY AVAILABLE: {props.quantity} pounds</p>
-          </div>
+            <p><strong>PRICE:</strong> ${props.price} / lb</p>
+            <p><strong>QUANTITY AVAILABLE:</strong> {props.quantity} pounds</p>
+            </div> 
         </div>
-        <hr />
-      </div>
-    </React.Fragment>
+        
+    </div>
   );
 }
 

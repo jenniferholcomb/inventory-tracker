@@ -22,9 +22,12 @@ function EditItemForm(props) {
 
   return (
     <React.Fragment>
+      <div className="formCard">
       <ReusableForm 
         formSubmissionHandler={handleEditItemSubmission}
-        buttonText="Edit Bean" />
+        buttonText="Edit Bean" 
+        headerText="EDIT BEAN" />
+      </div>
     </React.Fragment>
   );
 }
