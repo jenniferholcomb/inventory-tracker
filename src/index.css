@@ -23,7 +23,8 @@ header {
 
 .mast-head {
   display: inline-grid;
-  grid-template-columns: 1fr 7fr 1fr;
+  grid-template-columns: repeat(5, 200px);
+
 }
 
 .logo-B {
@@ -44,14 +45,22 @@ h1#header {
   color: white;
 }
 
-.inventory-widget {
-  grid-column: 3;
-  margin-top: -10px;
-}
+/* .inventory-widget {
+  
+} */
 
 .widget-items {
+  /* text-align: right; */
+  /* margin-top: 46px; */
+  display: grid;
+  grid-column: 5;
+  margin-top: -10px;
   text-align: right;
-  margin-top: 46px;
+  align-items: center;
+}
+
+.inventory {
+  margin-top: -80px;
 }
 
 #container-items-list {
@@ -137,7 +146,7 @@ button {
 
 button:hover {
   transform: scale(1.04);
-  //transition: all 0.5s ease;
+  /* transition: all 0.5s ease; */
   /* background-color: rgba(244, 241, 238, 0.515); */
 }
 

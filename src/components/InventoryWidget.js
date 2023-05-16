@@ -6,12 +6,14 @@ function InventoryWidget(props) {
     <React.Fragment>
       <div className="widget-items">
         <h3>INVENTORY</h3>
-        {props.itemsList.map((item, index) => 
-          <React.Fragment key={item.id}>
-            {item.name} : {item.quantity} lbs
-            <br />
-          </React.Fragment>
-        )}
+        <div className="inventory">
+          {props.itemsList.map((item, index) => 
+            <React.Fragment key={item.id}>
+              {item.name} : {item.quantity} lbs
+              <br />
+            </React.Fragment>
+          )}
+        </div>
       </div>
     </React.Fragment>
   );
