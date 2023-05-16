@@ -5,7 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: rgb(248, 235, 211);
+  background-color: rgb(254, 245, 230);
 }
 
 code {
@@ -14,25 +14,44 @@ code {
 }
 
 header {
-  display: flex;
-  justify-content: space-between;
-  background-color: rgb(52, 36, 29);
+
+  /* justify-content: space-between; */
+  background-color: rgb(42, 29, 24);
   color:white;
-  padding: 1rem;
+  /* padding: 1rem; */
 }
 
-input {
-  caret-color: red;
+.mast-head {
+  display: inline-grid;
+  grid-template-columns: 1fr 7fr 1fr;
 }
 
-textarea {
-  caret-color: red;
+.logo-B {
+  grid-column: 1;
+  font-size: 45px;
+  margin-top: -25px;
+  margin-bottom: -15px;
+  margin-right: 2px;
+  justify-self: end;
+}
+
+.logo {
+  grid-column: 2;
+  margin-top: 30px;
+}
+
+h1#header {
+  color: white;
 }
 
 .inventory-widget {
-  float: right;
+  grid-column: 3;
   margin-top: -10px;
-  margin-right: 20px;
+}
+
+.widget-items {
+  text-align: right;
+  margin-top: 46px;
 }
 
 #container-items-list {
@@ -104,9 +123,22 @@ button {
   width: 150px;
   height: 50px;
   border-radius: 5px;
-  background-color: rgb(236, 230, 253);
-  border-width: 1px;
-  box-shadow: 0 0px 10px 0 rgba(247, 243, 243, 0.459), 2px 3px 2px 0 rgba(7, 7, 5, 0.1);
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  outline: none;
+  border-top: none;
+  border-left: none;
+  background-color: rgb(210, 204, 249);
+  border-width: 1px; 
+  border-color: rgba(0, 0, 0, 0.37);
+  box-shadow: 3px 5px 10px 0 rgba(247, 243, 243, 0.459), 3px 3px 2px 0 rgba(4, 4, 3, 0.3);
+}
+
+button:hover {
+  transform: scale(1.04);
+  //transition: all 0.5s ease;
+  /* background-color: rgba(244, 241, 238, 0.515); */
 }
 
 label {
@@ -130,14 +162,6 @@ textarea {
   padding: 2rem;
 }
 
-h1#header {
-  width: 50px;
-  color: white;
-  font-size: 36px;
-  margin-left: 2rem;
-  letter-spacing: 3px;
-}
-
 .content {
   position: absolute;
   word-wrap:break-word;
@@ -157,3 +181,12 @@ h2 {
   margin-right: 10px;
   margin-top: 0px;
 }
+
+
+/* input {
+  caret-color: red;
+}
+
+textarea {
+  caret-color: red;
+} */

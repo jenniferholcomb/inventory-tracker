@@ -5,9 +5,16 @@ function Header(props) {
   return (
     <React.Fragment>
       <header>
-        <h1 id="header"><strong>BOUTIQUE BEANS</strong></h1> 
-        <div className="inventory-widget">
-          {props.widgetAreaComponent}
+        <div className='mast-head'>
+          <div className="logo-B">
+            <h1><strong>B</strong></h1> 
+          </div>
+          <div className="logo">
+            <h1>OUTIQUE<br/>&nbsp;EANS</h1>
+          </div>
+          <div className="inventory-widget">
+            {props.widgetAreaComponent}
+          </div>
         </div>
       </header>
     </React.Fragment>
