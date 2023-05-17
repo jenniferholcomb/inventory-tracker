@@ -22,29 +22,32 @@ function ItemDetail(props) {
     <React.Fragment>
       <div className="details">
         <h1>ITEM DETAILS</h1>
+        <div className="details-info">
+          <h1>{item.name}</h1>
+          <p>{item.notification}</p>
+          <p>ORIGIN: {item.origin}</p>
+          <p>ROAST: {item.roast}</p>
+          <p>DESCRIPTION: </p>
+          <blockquote>{item.description}</blockquote>
+          <p>PRICE: ${item.price} / lb</p>
+          <p>QUANTITY AVAILABLE: {item.quantity} pounds</p>
+        </div>
+        <div className="button-column"style={buttonStyles}>
 
-        <h1>{item.name}</h1>
-        <p>{item.notification}</p>
-        <p>ORIGIN: {item.origin}</p>
-        <p>ROAST: {item.roast}</p>
-        <p>DESCRIPTION: </p>
-        <blockquote>{item.description}</blockquote>
-        <p>PRICE: ${item.price} / lb</p>
-        <p>QUANTITY AVAILABLE: {item.quantity} pounds</p>
-      </div>
-      <div style={buttonStyles}>
-        <button onClick={onClickingEdit}>Edit Bean</button>
-        <button onClick={() => onClickingDelete(item.id)}>Delete Bean</button>
-        {/* <button onClick={() => onBuyingItem(1)}>Buy 1 pound</button> */}
-        <form onSubmit={ handleQuantityForm }>
-          <input 
-            type='number'
-            name='quantity'
-            placeholder="quantity"
-          />
-          <button type="submit">Buy Beans</button>
-        </form>
-       
+          {/* <button onClick={() => onBuyingItem(1)}>Buy 1 pound</button> */}
+          <form onSubmit={ handleQuantityForm }>
+            <input 
+              className="input-quantity"
+              type='number'
+              name='quantity'
+              max={item.quantity}
+              placeholder="Purchase Quantity"
+            /><br /><br />
+            <button type="submit">Buy Beans</button>
+          </form><br /><br /><br />
+          <button onClick={onClickingEdit}>Edit Bean</button><br /><br />
+          <button onClick={() => onClickingDelete(item.id)}>Delete Bean</button>
+        </div>
       </div>
     </React.Fragment>
   );

@@ -22,9 +22,10 @@ header {
 }
 
 .mast-head {
-  display: inline-grid;
-  grid-template-columns: repeat(5, 200px);
-
+  display: grid;
+  grid-template-columns: 15% 25% 20% 20% 20%;
+  outline: 1px solid white;
+  width: 100%;
 }
 
 .logo-B {
@@ -45,22 +46,25 @@ h1#header {
   color: white;
 }
 
-/* .inventory-widget {
-  
-} */
+.inventory-widget {
+  display: grid;
+  grid-column: 3 / span 3;
+  justify-content: right;
+  padding-right: 80px;
+  padding-top: 15px;
+}
 
 .widget-items {
   /* text-align: right; */
   /* margin-top: 46px; */
-  display: grid;
-  grid-column: 5;
-  margin-top: -10px;
-  text-align: right;
-  align-items: center;
+
+  
+  
+  
 }
 
 .inventory {
-  margin-top: -80px;
+ 
 }
 
 #container-items-list {
@@ -94,6 +98,52 @@ h1#header {
   /* background-color: rgba(244, 241, 238, 0.515); */
 }
 
+.container-details {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  justify-items: center;
+
+}
+
+.details {
+  display: grid;
+  grid-row: 1 / span 5;
+  justify-content: center;
+  align-items:start;
+  grid-column: span 5 / span 5;
+  width: 80%;
+  border-radius: 5px;
+  margin-top: 30px;
+  border: none;
+  background-color: rgba(255, 255, 255, 0.785);
+  box-shadow: 0 0px 10px 0 rgba(247, 243, 243, 0.459), 20px 6px 25px 0 rgba(156, 155, 155, 0.25);
+  border: 1px solid black;
+  padding-bottom: 20px;
+  padding-left: 30px;
+}
+
+.details-info {
+  
+  grid-column: 1;
+}
+
+.detBtn {
+  display: flex;
+  margin-left: 30px;
+  margin-top: 30px;
+}
+
+.button-column {
+  grid-column: 2;
+  margin-right: 30px;
+}
+
+.input-quantity {
+  width: 92%;
+  height: 20px;
+}
+
 .formSubmission {
   padding: 2rem;
   margin-left: 30px;
@@ -121,11 +171,6 @@ h1#header {
 .form {
   display: grid;
   grid-template-columns: repeat(6, minmax(0, 1fr));
-}
-
-.details {
-  padding: 3rem;
-  /* display: flex; */
 }
 
 button {

@@ -12,9 +12,9 @@ function Header(props) {
           <div className="logo">
             <h1>OUTIQUE<br/>&nbsp;EANS</h1>
           </div>
-          {/* <div className="inventory-widget"> */}
+          <div className="inventory-widget"> 
             {props.widgetAreaComponent}
-          {/* </div> */}
+          </div>
         </div>
       </header>
     </React.Fragment>

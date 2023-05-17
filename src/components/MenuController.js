@@ -83,7 +83,7 @@ class MenuController extends React.Component {
     const index = this.state.itemsList.indexOf(this.state.selectedItem);
     newItemsList.splice(index, 1, purchasedItem);
 
-    purchasedItem.notification = (purchasedItem.quantity < 1) ? "OUT OF STOCK" :
+    purchasedItem.notification = (purchasedItem.quantity === 0) ? "OUT OF STOCK" :
     (purchasedItem.quantity <= 10) ? "ALMOST SOLD OUT!" : "" ;
 
     this.setState({
@@ -111,13 +111,19 @@ class MenuController extends React.Component {
         :
         this.state.selectedItem !== null ?
           <React.Fragment>
+            <div className="detBtn"> 
+              <button onClick={ this.handleReturningToList }>Return to Bean List</button>
+            </div>
+            
+            <div className="container-details">
+
             <ItemDetail item={ this.state.selectedItem }
                         onClickingDelete={ this.handleDeletingItem }
                         onClickingEdit={ this.handleEditClick } 
                         onBuyingItem={ this.handleBuyingClick } 
                         onQuantityCreation={ this.handleBuyingClick } />
-            <div className="returnButton">
-              <button onClick={ this.handleReturningToList }>Return to Bean List</button>
+            
+
             </div>
           </React.Fragment>
         :

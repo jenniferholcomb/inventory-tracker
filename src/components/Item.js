@@ -4,11 +4,11 @@ import PropTypes from 'prop-types';
 
 function Item(props) {
   const quantityNotification = 
-    props.quantity <= 10 ?
-      "ALMOST SOLD OUT!"
-    :
     props.quantity <= 0 ?
       "OUT OF STOCK"
+    :
+    props.quantity <= 10 ?
+      "ALMOST SOLD OUT!"
     : "";
   
   return (
