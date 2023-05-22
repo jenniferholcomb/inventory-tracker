@@ -32,7 +32,6 @@
 
 ## Known Bugs
 
-* "OUT OF STOCK" does not display when inventory is at 0.
 * If any issues are discovered, please email jenniferlholcomb@gmail.com.
 
 ## License
