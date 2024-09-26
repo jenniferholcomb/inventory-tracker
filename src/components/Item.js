@@ -2,6 +2,9 @@ import React from "react";
 import lineArt from "./../img/lines.svg"
 import PropTypes from 'prop-types';
 
+import colImg from "./../img/colombiaImg.png";
+import colFlag from "./../img/colombiaFlag.png";
+
 function Item(props) {
   const quantityNotification = 
     props.quantity <= 0 ?
@@ -14,17 +17,26 @@ function Item(props) {
   return (
     <div onClick = {() => props.whenItemClicked(props.id)}>
     <div className="itemCard">
-      <img  className="" src={lineArt}/> 
-          <div className="content">
-            <h1>{props.name}</h1>
-            <p>{quantityNotification}</p>
-            <p><strong>ORIGIN:</strong> {props.origin}</p>
-            <p><strong>ROAST:</strong> {props.roast}</p>
-            <p><strong>DESCRIPTION:</strong> </p>
-            <blockquote>{props.description}</blockquote>
-            <p><strong>PRICE:</strong> ${props.price} / lb</p>
-            <p><strong>QUANTITY AVAILABLE:</strong> {props.quantity} pounds</p>
-            </div> 
+      <div className="cardImgContainer">
+        <img className="cardImg" src={colImg} alt="coffee plantation in Colombia" />
+      </div>
+      <div className="content">
+        <div className="cardTopContainer">
+          <h1 className="cardHeader">{props.name}</h1>
+          <h3 className="cardSubHead">ORIGIN:&nbsp;&nbsp;<span className="subHeadText">{props.origin}</span></h3>
+          <h3 className="cardSubHead">ROAST:&nbsp;&nbsp;<span className="subHeadText">{props.roast}</span></h3>
+        </div>
+        <div className="flagContainer">          
+          <img className="flag" src={colFlag} alt="Colombia flag" />
+        </div>
+        {/* <p>{quantityNotification}</p> */}
+        <div className="desColumn"> 
+          <h3 className={`${"cardSubHead"}`}>DESCRIPTION:</h3>
+          <blockquote className="description">{props.description}</blockquote>
+        </div>
+        <h4 className="cardPrice">${props.price}<span className="priceUnit">/lb</span></h4>
+        {/* <h3 className="cardSubHead">QUANTITY AVAILABLE: {props.quantity} pounds</h3> */}
+        </div> 
         </div>
         
     </div>

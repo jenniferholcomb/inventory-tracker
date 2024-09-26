@@ -7,6 +7,10 @@ import ItemsList from "./ItemsList";
 import InventoryWidget from "./InventoryWidget";
 import { v4 } from 'uuid';
 
+import award1 from "./../img/steward.png";
+import award2 from "./../img/leagueAward.png";
+import award3 from "./../img/bioAward.png";
+
 class MenuController extends React.Component {
 
   constructor(props) {
@@ -95,57 +99,72 @@ class MenuController extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <Header widgetAreaComponent=
-          { <InventoryWidget itemsList={ this.state.itemsList }/> }/>
-        { 
-        this.state.editItemFormVisible ?
-          <React.Fragment>
-            <div className="form">
-              <div className="returnButton">
+        <div className="appContainer">
+          <div className="leftPage">
+            <img className="aw1" src={award1} alt="fictional award from Bio-Farmers of America" />
+            <img className="aw2" src={award2} alt="fictional award from League of Farmers" />
+            <img className="aw3" src={award3} alt="fictional award, the Bio Award" />
+          </div>
+          <div className="centerPage"> 
+          <Header widgetAreaComponent=
+            { <InventoryWidget itemsList={ this.state.itemsList }/> }/>
+          { 
+          this.state.editItemFormVisible ?
+            <React.Fragment>
+              <div className="form">
+                <div className="returnButton">
+                  <button onClick={ this.handleReturningToList }>Return to Bean List</button>
+                </div>
+                <EditItemForm item={ this.state.selectedItem }
+                              onEditingItem={ this.handleEditingItem } />
+              </div>
+            </React.Fragment>
+          :
+          this.state.selectedItem !== null ?
+            <React.Fragment>
+              <div className="detBtn"> 
                 <button onClick={ this.handleReturningToList }>Return to Bean List</button>
               </div>
-              <EditItemForm item={ this.state.selectedItem }
-                            onEditingItem={ this.handleEditingItem } />
-            </div>
-          </React.Fragment>
-        :
-        this.state.selectedItem !== null ?
-          <React.Fragment>
-            <div className="detBtn"> 
-              <button onClick={ this.handleReturningToList }>Return to Bean List</button>
-            </div>
-            
-            <div className="container-details">
+              
+              <div className="container-details">
 
-            <ItemDetail item={ this.state.selectedItem }
-                        onClickingDelete={ this.handleDeletingItem }
-                        onClickingEdit={ this.handleEditClick } 
-                        onBuyingItem={ this.handleBuyingClick } 
-                        onQuantityCreation={ this.handleBuyingClick } />
-            
+              <ItemDetail item={ this.state.selectedItem }
+                          onClickingDelete={ this.handleDeletingItem }
+                          onClickingEdit={ this.handleEditClick } 
+                          onBuyingItem={ this.handleBuyingClick } 
+                          onQuantityCreation={ this.handleBuyingClick } />
+              
 
-            </div>
-          </React.Fragment>
-        :
-        this.state.newItemFormVisible ?
-          <React.Fragment>
-            <div className="form">
-            <div className="returnButton">
-                <button onClick={ this.handleClick }>Return to Bean List</button>
               </div>
-              <NewItemForm onNewItemCreation={ this.handleAddingNewItem } />
-            </div>
-          </React.Fragment>
-        :
-          <React.Fragment>
-            <div className="addButton">
-              <button onClick={ this.handleClick }>Add New Bean</button>
-            </div>
-            <ItemsList itemsList={ this.state.itemsList } 
-                       onItemSelection={ this.handleChangingSelectedItem } />
+            </React.Fragment>
+          :
+          this.state.newItemFormVisible ?
+            <React.Fragment>
+              <div className="form">
+              <div className="returnButton">
+                  <button onClick={ this.handleClick }>Return to Bean List</button>
+                </div>
+                <NewItemForm onNewItemCreation={ this.handleAddingNewItem } />
+              </div>
+            </React.Fragment>
+          :
+            <React.Fragment>
+              <div className="addButton">
+                <button onClick={ this.handleClick }>Add New Bean</button>
+              </div>
+              <ItemsList itemsList={ this.state.itemsList } 
+                        onItemSelection={ this.handleChangingSelectedItem } />
 
-          </React.Fragment>
-        }
+            </React.Fragment>
+          }
+          </div>
+          <div className="rightPage">
+
+          </div>
+          <div className="footer">
+            <h4 className="footerText">Crafted with care, from earth to cup</h4>
+          </div>
+        </div>
       </React.Fragment>
     );
   }  
