@@ -106,57 +106,52 @@ class MenuController extends React.Component {
             <img className="aw3" src={award3} alt="fictional award, the Bio Award" />
           </div>
           <div className="centerPage"> 
-          <Header widgetAreaComponent=
-            { <InventoryWidget itemsList={ this.state.itemsList }/> }/>
-          { 
-          this.state.editItemFormVisible ?
-            <React.Fragment>
-              <div className="form">
-                <div className="returnButton">
+            <Header widgetAreaComponent=
+              { <InventoryWidget itemsList={ this.state.itemsList } 
+                                onAddBeanClick={ this.handleClick } />
+              }
+            /> 
+            this.state.editItemFormVisible ?
+              <React.Fragment>
+                <div className="form">
+                  <div className="returnButton">
+                    <button onClick={ this.handleReturningToList }>Return to Bean List</button>
+                  </div>
+                  <EditItemForm item={ this.state.selectedItem }
+                                onEditingItem={ this.handleEditingItem } />
+                </div>
+              </React.Fragment>
+            :
+            this.state.selectedItem !== null ?
+              <React.Fragment>
+                <div className="detBtn"> 
                   <button onClick={ this.handleReturningToList }>Return to Bean List</button>
                 </div>
-                <EditItemForm item={ this.state.selectedItem }
-                              onEditingItem={ this.handleEditingItem } />
-              </div>
-            </React.Fragment>
-          :
-          this.state.selectedItem !== null ?
-            <React.Fragment>
-              <div className="detBtn"> 
-                <button onClick={ this.handleReturningToList }>Return to Bean List</button>
-              </div>
-              
-              <div className="container-details">
-
-              <ItemDetail item={ this.state.selectedItem }
-                          onClickingDelete={ this.handleDeletingItem }
-                          onClickingEdit={ this.handleEditClick } 
-                          onBuyingItem={ this.handleBuyingClick } 
-                          onQuantityCreation={ this.handleBuyingClick } />
-              
-
-              </div>
-            </React.Fragment>
-          :
-          this.state.newItemFormVisible ?
-            <React.Fragment>
-              <div className="form">
-              <div className="returnButton">
-                  <button onClick={ this.handleClick }>Return to Bean List</button>
+                
+                <div className="container-details">
+                  <ItemDetail item={ this.state.selectedItem }
+                              onClickingDelete={ this.handleDeletingItem }
+                              onClickingEdit={ this.handleEditClick } 
+                              onBuyingItem={ this.handleBuyingClick } 
+                              onQuantityCreation={ this.handleBuyingClick } />
                 </div>
-                <NewItemForm onNewItemCreation={ this.handleAddingNewItem } />
-              </div>
-            </React.Fragment>
-          :
-            <React.Fragment>
-              <div className="addButton">
-                <button onClick={ this.handleClick }>Add New Bean</button>
-              </div>
-              <ItemsList itemsList={ this.state.itemsList } 
-                        onItemSelection={ this.handleChangingSelectedItem } />
+              </React.Fragment>
+            :
+            this.state.newItemFormVisible ?
+              <React.Fragment>
+                <div className="form">
+                <div className="returnButton">
+                    <button onClick={ this.handleClick }>Return to Bean List</button>
+                  </div>
+                  <NewItemForm onNewItemCreation={ this.handleAddingNewItem } />
+                </div>
+              </React.Fragment>
+            :
+              <React.Fragment>
+                <ItemsList itemsList={ this.state.itemsList } 
+                          onItemSelection={ this.handleChangingSelectedItem } />
 
-            </React.Fragment>
-          }
+              </React.Fragment>
           </div>
           <div className="rightPage">
 

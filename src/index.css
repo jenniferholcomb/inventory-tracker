@@ -76,8 +76,8 @@ header {
 }
 
 .logo {
-  max-width: 96%;
-  max-height: 96%;
+  max-width: 196px;
+  max-height: 196px;
   align-self: center;
 }
 
@@ -86,23 +86,120 @@ h1#header {
 }
 
 .inventory-widget {
+  grid-column: 3;
+  grid-row: 1;
   display: grid;
   max-width: 100%;
-  justify-content: right;
+  /* justify-content: right; */
   /* border: dashed blue; */
-}
-
-.widget-items {
-  /* text-align: right; */
-  /* margin-top: 46px; */
-
-  
-  
-  
+  min-width: 340px;
+  min-height: auto;
+  transform: rotate(2.384deg) translateY(-2%) translateX(23%);
+  flex-shrink: 0;
+  background-image: url('./img/indexCard.webp');
+  background-repeat: no-repeat;
+  background-size: 95% 100%;
+  filter: drop-shadow(0 0 5px #d5d4d4);
 }
 
 .inventory {
- 
+  grid-column: 3;
+  grid-row: 1;
+  transform: rotate(2.384deg) translateY(-2%) translateX(23%);
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: 5rem 1fr;
+  margin-right: 19px;
+}
+
+.inventoryHeader, .itemName, .itemPounds {
+  max-width: 100%;
+  color: #000;
+  font-family: "Fira Mono";
+  margin: 0;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.inventoryHeader {
+  grid-column: 1;
+  max-width: 100%;
+  text-align: left;
+  padding: 26px 0 0 30px;
+  font-size: 18px;
+  letter-spacing: 1.26px;
+  text-transform: uppercase;
+}
+
+.widgetActions {
+  grid-column: 2;
+  display: flex;
+  flex-direction: column;
+  max-width: 100%;
+  padding-right: 25px;
+  padding-top: 10px;
+}
+
+.widgetLink {
+  color: #50A060;
+  text-align: right;
+  font-family: Mulish;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 1000;
+  line-height: 15px; /* 115.385% */
+  letter-spacing: 1.17px;
+  text-transform: uppercase;
+  margin: 0;
+  padding-bottom: 19px;
+}
+
+.linkB {
+  transform: rotate(-1deg);
+}
+
+.widgetLink:hover {
+  transform: scale(1.1) rotate(-1deg);
+  transition: all 0.5s ease;
+  color: #4a9759;
+}
+
+a {
+  color: inherit;
+  text-decoration: none !important;
+  pointer-events: all;
+}
+
+.inv-1 {
+  grid-column: 1;
+  padding: 0 15px 0 30px;
+}
+
+.inv-1 {
+  display: grid;
+  grid-template-columns: 1.3fr .7fr;
+  grid-template-rows: 2.1rem 2.1rem 2.1rem 2.1rem;
+
+}
+
+.itemName {
+  grid-column: 1;
+  font-size: 14px;
+  letter-spacing: 0.98px;
+}
+
+.itemPounds {
+  grid-column: 2;
+  text-align: right;
+  font-size: 12px;
+  letter-spacing: 0.84px;
+  padding-top: 2px;
+}
+
+.itemName, .itemPounds {
+  display: flex;
+  flex-direction: column;
 }
 
 #container-items-list {
@@ -167,7 +264,7 @@ h1#header {
   width: 51px;
   height: 51px;
   flex-shrink: 0;
-  margin: 15px 13px 0 0;
+  margin: 15px 15px 0 0;
   display: flex;
 }
 
