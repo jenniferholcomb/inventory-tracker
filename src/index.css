@@ -18,29 +18,52 @@ code {
 
 .appContainer {
   display: grid;
-  grid-template-columns: 6rem 1fr 6rem;
+  grid-template-columns: 5rem 1fr 5rem;
   max-width: 100vw;
   overflow-x: hidden;
 }
 
 .leftPage, .rightPage {
-  background: rgba(29, 69, 37, 0.10);
+  background: linear-gradient(180deg, rgba(255, 255, 253, 0.10) 31.51%, rgba(133, 72, 33, 0.10) 87.09%);
+  /* background: rgba(29, 69, 37, 0.05); */
   display: flex;
   max-width: 100%;
-  max-height: 100%;
 }
 
 .leftPage {
-  grid-column: 1;
   display: flex;
   flex-direction: column;
-  padding: 1rem 1rem 0 1rem;
-  gap: 1rem;
+  align-content: end;
+  justify-content: end;
+  gap: .8rem;
+  width: 5rem;
+  height: 100%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.rightPage {
+  grid-column: 3;
+  display: flex;
+  flex-direction: column;
+  width: 5rem;
+  height: 100%;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  /* bottom: 0; */
 }
 
 .aw1, .aw2, .aw3 {
-  max-width: 100%;
-  max-height: 100%;
+  padding: 0 1rem 0 1rem;
+  max-width: 95%;
+  max-height: 95%;
+}
+
+.aw1 {
+  padding-bottom: 3rem;
 }
 
 .rightPage {
@@ -49,21 +72,48 @@ code {
 
 .centerPage {
   grid-column: 2;
+  height: 18rem;
+  width: 100%;
+
+  display: grid;
+  place-items: center;
+  color: #ff43ea;
+  position: relative;
+}
+
+.centerPage::before {
+  content: "";
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* height: 18rem; */
+  background-image: 
+  linear-gradient(to bottom, rgba(255,255,253,.1), rgba(255,255,253,.3)),
+  url('./img/coffeeBeans.webp');
+  background-repeat: no-repeat;
+  background-size: 100% 33rem;
+  background-position: 50% -6rem;
+  filter: saturate(60%);
+  position: absolute;
+  box-shadow: 0px 3px 9.1px 1px rgba(0, 0, 0, 0.25);
+}
+
+.centerPageBottom {
+  grid-column: 2;
+  /* background: linear-gradient(180deg, rgba(248, 241, 34, 0.04) 0%, rgba(255, 255, 253, 0.08) 46.19%); */
 }
 
 header {
-
+  position: relative;
   flex-shrink: 0;
-  /* justify-content: space-between; */
-
-  /* padding: 1rem; */
 }
 
 .mast-head {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   max-width: 100%;
-  height: 14rem;
+  height: 18rem;
 }
 
 .logoContainer {
@@ -73,6 +123,7 @@ header {
   max-height: 100%;
   align-content: center;
   justify-content: center;
+  /* padding-bottom: 80px; */
 }
 
 .logo {
@@ -86,30 +137,33 @@ h1#header {
 }
 
 .inventory-widget {
-  grid-column: 3;
+  display: none;
+  /* grid-column: 3;
   grid-row: 1;
   display: grid;
-  max-width: 100%;
-  /* justify-content: right; */
-  /* border: dashed blue; */
-  min-width: 340px;
-  min-height: auto;
-  transform: rotate(2.384deg) translateY(-2%) translateX(23%);
+  max-width: 95%;
+  max-width: 360px;
+  max-height: 13rem;
+  transform: rotate(2.384deg) translateY(-3%) translateX(43%);
   flex-shrink: 0;
   background-image: url('./img/indexCard.webp');
   background-repeat: no-repeat;
   background-size: 95% 100%;
   filter: drop-shadow(0 0 5px #d5d4d4);
+  z-index: 99; */
 }
 
 .inventory {
-  grid-column: 3;
+  display: none;
+  /* grid-column: 3;
   grid-row: 1;
-  transform: rotate(2.384deg) translateY(-2%) translateX(23%);
+  transform: rotate(2.384deg) translateY(-2.5%) translateX(35%);
   display: grid;
+  max-width: 90%;
   grid-template-columns: 50% 50%;
-  grid-template-rows: 5rem 1fr;
+  grid-template-rows: 4rem 1fr;
   margin-right: 19px;
+  z-index: 999; */
 }
 
 .inventoryHeader, .itemName, .itemPounds {
@@ -126,7 +180,7 @@ h1#header {
   grid-column: 1;
   max-width: 100%;
   text-align: left;
-  padding: 26px 0 0 30px;
+  padding: 26px 0 0 35px;
   font-size: 18px;
   letter-spacing: 1.26px;
   text-transform: uppercase;
@@ -137,7 +191,7 @@ h1#header {
   display: flex;
   flex-direction: column;
   max-width: 100%;
-  padding-right: 25px;
+  padding-right: 35px;
   padding-top: 10px;
 }
 
@@ -155,14 +209,15 @@ h1#header {
   padding-bottom: 19px;
 }
 
-.linkB {
+/* .linkB {
   transform: rotate(-1deg);
-}
+} */
 
 .widgetLink:hover {
   transform: scale(1.1) rotate(-1deg);
   transition: all 0.5s ease;
   color: #4a9759;
+  cursor: pointer;
 }
 
 a {
@@ -173,13 +228,13 @@ a {
 
 .inv-1 {
   grid-column: 1;
-  padding: 0 15px 0 30px;
+  padding: 0 10px 0 35px;
 }
 
 .inv-1 {
   display: grid;
-  grid-template-columns: 1.3fr .7fr;
-  grid-template-rows: 2.1rem 2.1rem 2.1rem 2.1rem;
+  grid-template-columns: 1.1fr .9fr;
+  grid-template-rows: 2rem 2rem 2rem 2rem;
 
 }
 
@@ -187,6 +242,7 @@ a {
   grid-column: 1;
   font-size: 14px;
   letter-spacing: 0.98px;
+  padding-top: 9px;
 }
 
 .itemPounds {
@@ -194,7 +250,7 @@ a {
   text-align: right;
   font-size: 12px;
   letter-spacing: 0.84px;
-  padding-top: 2px;
+  padding-top: 11px;
 }
 
 .itemName, .itemPounds {
@@ -209,34 +265,43 @@ a {
   flex-flow: row wrap;
   justify-content: space-evenly;
   gap: 2rem;
+  padding-bottom: 80px;
+  padding-top: 40px;
   /* flex: 6; */
 }
 
 .itemCard {
   position: relative;
-  overflow: hidden;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  width: 34rem;
+  grid-template-columns: repeat(2, 1fr);
+  width: 539px;
   height: 297px;
   flex-shrink: 0;
   border-radius: 5px;
-  background: #F4E7D1;
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  background: rgba(133, 72, 33, 0.10);
+  box-shadow: 0px 4px 7.2px 0px rgba(10, 9, 9, 0.30);
+}
+
+
+.itemCard:hover {
+  transform: scale(1.04);
+  transition: all 0.5s ease;
+  cursor: pointer;
 }
 
 .cardImgContainer {
   grid-column: 1;
   max-width: 100%;
+  max-height: 100%;
   display: grid;
   justify-content: center;
   align-content: center;
 }
 
 .cardImg {
-  max-width: 100%;
-  max-height: 100%;
-  padding-top: .44rem;
+  /* max-width: 100%;
+  max-height: 100%; */
+  padding: 9px 0 0 9px;
 }
 
 .content {
@@ -244,6 +309,8 @@ a {
   word-wrap: break-word;
   display: grid;
   grid-template-columns: auto auto;
+  max-height: 100%;
+  margin: 15px 17px 13px 12px;
 }
 
 .cardTopContainer {
@@ -259,51 +326,65 @@ a {
 }
 
 .flag {
-  grid-column: 2;
-  grid-row: 1;
   width: 51px;
   height: 51px;
   flex-shrink: 0;
-  margin: 15px 15px 0 0;
+  margin: 0;
   display: flex;
 }
 
 .cardHeader {
-  color: #000;
+  color: #343434;
   font-family: Mulish;
   font-size: 18px;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
-  letter-spacing: 1.26px;
+  letter-spacing: 1.4px;
   text-transform: uppercase;
-  margin: 29px 0 13px 0;
+  margin: 10px 0 14px 0;
 }
 
 .cardSubHead {
-  color: #000;
+  color: rgba(93, 91, 91, 0.80);
   font-family: Mulish;
-  font-size: 14px;
+  font-size: 12px;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
-  letter-spacing: 0.98px;
+  letter-spacing: 0.84px;
   text-transform: uppercase;
-  margin: 9px 0 0px 0;
+  margin: 0;
+  margin-bottom: 7px;
+}
+
+.subHeadText, .subHeadTextB {
+  color: #000;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 0.48px;
+  text-transform: capitalize;
 }
 
 .subHeadText {
-  font-size: 12px;
-  font-weight: 400;
-  letter-spacing: 0.36px;
   text-transform: capitalize;
+}
+
+.subHeadTextB {
+  text-transform: lowercase;
 }
 
 .desColumn {
   grid-column: 1 / span 2;
+  height: 9.2rem;
+  max-height: 8.6rem;
+  overflow-y: hidden;
+  margin-top: 4px;
 }
 
 .description {
+  width: 222px;
   color: #000;
   font-family: Mulish;
   font-size: 12px;
@@ -311,79 +392,84 @@ a {
   font-weight: 400;
   line-height: normal;
   letter-spacing: 0.36px;
-  margin: 7px 50px 8px 16px;
+  margin: 9px 16px 0px 16px;
 }
 
 .cardPrice {
   grid-column: 1 / span 2;
   color: #000;
   font-family: Mulish;
-  font-size: 18px;
+  font-size: 16px;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
   letter-spacing: 1.26px;
   text-transform: uppercase;
-  margin: 0 17px 17px 0;
+  margin: 0;
   text-align: end;
+  align-self: flex-end;
+  max-height: 100%;
+  padding-top: 2px;
 }
 
 .priceUnit {
-  color: #000;
+  color: rgba(93, 91, 91, 0.80);
   font-family: Mulish;
-  font-size: 14px;
+  font-size: 12px;
   font-style: normal;
-  font-weight: 700;
+  font-weight: 600;
   line-height: normal;
-  letter-spacing: 0.98px;
+  letter-spacing: 0.84px;
   text-transform: uppercase;
 }
 
-/* .content {
-  position: absolute;
-
-  padding-left: 30px;
-} */
-
-.itemCard:hover {
-  transform: scale(1.04);
-  transition: all 0.5s ease;
+.container-details {
+  position: fixed;
+  max-width: 100vw;
+  min-height: 100%;
+  background: rgba(93, 91, 91, 0.8);
+  opacity: var(20%);
+  backdrop-filter: blur(5px) saturate(70%);
+  border: dashed pink;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
 }
 
-.container-details {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(5, 1fr);
-  justify-items: center;
-  border: dashed pink;
+.container-details:first-child {
+  position: absolute;
 }
 
 .details {
   display: grid;
+  /* grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  justify-items: center;
+  display: grid;
   grid-row: 1 / span 5;
   justify-content: center;
   align-items:start;
-  grid-column: span 5 / span 5;
-  width: 80%;
+  grid-column: span 5 / span 5; */
+  width: 70%;
+  max-height: 30rem;
+  align-self: center;
+  margin-bottom: 2.8rem;
   border-radius: 5px;
   margin-top: 30px;
-  border: none;
-  background-color: rgba(255, 255, 255, 0.785);
-  box-shadow: 0 0px 10px 0 rgba(247, 243, 243, 0.459), 20px 6px 25px 0 rgba(156, 155, 155, 0.25);
-  border: 1px solid black;
+  background-color: #F4E7D1;
   padding-bottom: 20px;
   padding-left: 30px;
 }
 
 .details-info {
-  
   grid-column: 1;
 }
 
 .detBtn {
-  display: flex;
   margin-left: 30px;
-  margin-top: 30px;
+  z-index: 9999;
 }
 
 .button-column {
@@ -472,25 +558,16 @@ textarea {
   width: 208px;
 }
 
-h2 {
-  text-align: center;
-  margin-right: 10px;
-  margin-top: 0px;
-}
-
-
-/* input {
-  caret-color: red;
-}
-
-textarea {
-  caret-color: red;
-} */
 
 .footer {
-  grid-column: 1 / span 3;
-  max-width: 100%;
-  max-height: 3.5rem;
+  /* grid-column: 1 / span 3; */
+  max-width: 100vw;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  /* height:30px; */
+  max-height: 2.5rem;
   background: #50A060;
   display: grid;
   align-content: center;
@@ -498,12 +575,12 @@ textarea {
 
 .footerText {
   color: #FFFFFD;
-text-align: center;
-/* font-family: Epilogue; */
-font-size: 18px;
-font-style: normal;
-font-weight: 500;
-line-height: normal;
-letter-spacing: 7.2px;
-text-transform: uppercase;
+  text-align: center;
+  /* font-family: Epilogue; */
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: 7.2px;
+  text-transform: uppercase;
 }

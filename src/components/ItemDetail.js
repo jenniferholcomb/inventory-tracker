@@ -2,7 +2,6 @@ import React from "react";
 import PropTypes from 'prop-types';
 
 function ItemDetail(props) {
-  console.log(props)
   const { item, onClickingDelete, onClickingEdit, onQuantityCreation } = props;
 
   const buttonStyles = {
@@ -21,8 +20,7 @@ function ItemDetail(props) {
   return (
     <React.Fragment>
       <div className="details">
-        <h1>ITEM DETAILS</h1>
-        {/* <div className="details-info">
+        <div className="details-info">
           <h1>{item.name}</h1>
           <p>{item.notification}</p>
           <p>ORIGIN: {item.origin}</p>
@@ -35,7 +33,7 @@ function ItemDetail(props) {
         <div className="button-column"style={buttonStyles}>
 
           {/* <button onClick={() => onBuyingItem(1)}>Buy 1 pound</button> */}
-          {/* <form onSubmit={ handleQuantityForm }>
+          <form onSubmit={ handleQuantityForm }>
             <input 
               className="input-quantity"
               type='number'
@@ -47,7 +45,7 @@ function ItemDetail(props) {
           </form><br /><br /><br />
           <button onClick={onClickingEdit}>Edit Bean</button><br /><br />
           <button onClick={() => onClickingDelete(item.id)}>Delete Bean</button>
-        </div>  */}
+        </div> 
       </div>
     </React.Fragment>
   );

@@ -11,6 +11,15 @@ import award1 from "./../img/steward.png";
 import award2 from "./../img/leagueAward.png";
 import award3 from "./../img/bioAward.png";
 
+import colImg from "./../img/colombiaImg.png";
+import colFlag from "./../img/colombiaFlag.png";
+import brazilImg from "./../img/cp.png";
+import brazilFlag from "./../img/brazilFlag.png";
+import indiaImg from "./../img/icp.png";
+import indiaFlag from "./../img/indiaFlag.png";
+import philImg from "./../img/pcp.png";
+import philFlag from "./../img/philFlag.png";
+
 class MenuController extends React.Component {
 
   constructor(props) {
@@ -19,11 +28,17 @@ class MenuController extends React.Component {
       newItemFormVisible: false,
       editItemFormVisible: false,
       selectedItem: null,
-      itemsList: [ { name: 'Arabica', origin: 'Colombia', roast: 'medium', description: 'Our Arabica beans produce the highest-quality coffee, smooth and sweet with complex and intricate flavor undertones that may include fruit, sugar or chocolate. They will usually contain just enough acidity and very little bitterness.', price: 15, quantity: 130, notification: '', id: v4() }, { name: 'Robusta', origin: 'Brazil', roast: 'dark', description: 'Robusta coffee is stronger with a heavier body. It has a slight-bitter taste, but still smooth and robust with a fragrant aroma. It\'s deep flavor profile stands up well to creamer, milk, sugar, and other added ingredients.', price: 14, quantity: 130, notification: "", id: v4() }, { name: 'Liberica', origin: 'Phillipines', roast: 'light', description: 'A less caffeinated bean, with a nutty bold taste, and a floral aroma. It\'s unique profile is suited to those looking for a lighter cup of coffee, but enjoy the unique flavor notes this been produces. ', price: 17, quantity: 130, notification: "", id: v4() }, { name: 'Excelsa', origin: 'India', roast: 'light', description: 'Our excelsa beans have a tart, fruity flavor for a light roast, but with additional notes that are more like those you\'d find in a dark roast. This exceptional bean is a rare treat, many feel it produces the tastiest of cup of coffee.', price: 21, quantity: 130, notification: "", id: v4() } ]
+      itemsList: [ { name: 'Arabica', origin: 'Colombia', roast: 'medium', description: 'Our Arabica beans produce the highest-quality coffee, smooth and sweet with complex and intricate flavor undertones that may include fruit, sugar or chocolate. They will usually contain just enough acidity and very little bitterness.', price: 15, quantity: 130, notification: '', id: v4() }, { name: 'Robusta', origin: 'Brazil', roast: 'dark', description: 'Robusta coffee is stronger with a heavier body. It has a slight-bitter taste, but still smooth and robust with a fragrant aroma. It\'s deep flavor profile stands up well to creamer, milk, sugar, and other added ingredients.', price: 14, quantity: 130, notification: "", id: v4() }, { name: 'Liberica', origin: 'Phillipines', roast: 'light', description: 'A less caffeinated bean, with a nutty bold taste, and a floral aroma. It\'s unique profile is suited to those looking for a lighter cup of coffee, but enjoy the unique flavor notes this been produces. ', price: 17, quantity: 130, notification: "", id: v4() }, { name: 'Excelsa', origin: 'India', roast: 'light', description: 'Our excelsa beans have a tart, fruity flavor for a light roast, but with additional notes that are more like those you\'d find in a dark roast. This exceptional bean is a rare treat, many feel it produces the tastiest of cup of coffee.', price: 21, quantity: 130, notification: "", id: v4() } ],
+      countryList: [ 
+                  {origin: 'Colombia', flag: colFlag, cpImg: colImg}, 
+                  {origin: 'Brazil', flag: brazilFlag, cpImg: brazilImg},
+                  {origin: 'India', flag: indiaFlag, cpImg: indiaImg},
+                  {origin: 'Phillipines', flag: philFlag, cpImg: philImg} ]
     };
   }
 
   handleClick = () => {
+    console.log("we made it")
     this.setState(prevState => ({ 
       newItemFormVisible: !prevState.newItemFormVisible 
     }));
@@ -101,16 +116,18 @@ class MenuController extends React.Component {
       <React.Fragment>
         <div className="appContainer">
           <div className="leftPage">
-            <img className="aw1" src={award1} alt="fictional award from Bio-Farmers of America" />
+            {/* <img className="aw3" src={award3} alt="fictional award, the Bio Award" />
             <img className="aw2" src={award2} alt="fictional award from League of Farmers" />
-            <img className="aw3" src={award3} alt="fictional award, the Bio Award" />
+            <img className="aw1" src={award1} alt="fictional award from Bio-Farmers of America" /> */}
           </div>
           <div className="centerPage"> 
             <Header widgetAreaComponent=
               { <InventoryWidget itemsList={ this.state.itemsList } 
-                                onAddBeanClick={ this.handleClick } />
+                                 onAddBeanClick={ this.handleClick } />
               }
             /> 
+          </div>
+            {
             this.state.editItemFormVisible ?
               <React.Fragment>
                 <div className="form">
@@ -124,11 +141,11 @@ class MenuController extends React.Component {
             :
             this.state.selectedItem !== null ?
               <React.Fragment>
+                
+                <div className="container-details">
                 <div className="detBtn"> 
                   <button onClick={ this.handleReturningToList }>Return to Bean List</button>
                 </div>
-                
-                <div className="container-details">
                   <ItemDetail item={ this.state.selectedItem }
                               onClickingDelete={ this.handleDeletingItem }
                               onClickingEdit={ this.handleEditClick } 
@@ -147,12 +164,15 @@ class MenuController extends React.Component {
                 </div>
               </React.Fragment>
             :
+            <div className="centerPageBottom">
               <React.Fragment>
                 <ItemsList itemsList={ this.state.itemsList } 
-                          onItemSelection={ this.handleChangingSelectedItem } />
+                          onItemSelection={ this.handleChangingSelectedItem } 
+                          countryList={ this.state.countryList } />
 
               </React.Fragment>
-          </div>
+            </div>
+            }
           <div className="rightPage">
 
           </div>

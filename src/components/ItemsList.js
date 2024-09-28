@@ -3,6 +3,7 @@ import Item from "./Item";
 import PropTypes from 'prop-types';
 
 function ItemsList(props) {
+
   return (
     <React.Fragment>
       <div id="container-items-list">
@@ -10,6 +11,8 @@ function ItemsList(props) {
           <Item 
             whenItemClicked={props.onItemSelection}
             name={item.name}
+            flag={props.countryList[props.countryList.findIndex(country => country.origin === item.origin)].flag}
+            plantImg={props.countryList[props.countryList.findIndex(country => country.origin === item.origin)].cpImg}
             origin={item.origin}
             roast={item.roast}
             description={item.description}
@@ -26,7 +29,8 @@ function ItemsList(props) {
 
 ItemsList.propTypes = {
   itemsList: PropTypes.array,
-  onItemSelection: PropTypes.func
+  onItemSelection: PropTypes.func,
+  countryList: PropTypes.array
 };
 
 export default ItemsList;
