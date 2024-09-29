@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from 'prop-types';
+import Item from "./Item";
 
 function ItemDetail(props) {
   const { item, onClickingDelete, onClickingEdit, onQuantityCreation } = props;
@@ -20,31 +21,46 @@ function ItemDetail(props) {
   return (
     <React.Fragment>
       <div className="details">
-        <div className="details-info">
-          <h1>{item.name}</h1>
-          <p>{item.notification}</p>
-          <p>ORIGIN: {item.origin}</p>
-          <p>ROAST: {item.roast}</p>
-          <p>DESCRIPTION: </p>
-          <blockquote>{item.description}</blockquote>
-          <p>PRICE: ${item.price} / lb</p>
-          <p>QUANTITY AVAILABLE: {item.quantity} pounds</p>
+        <div className="detailContent">
+          <Item 
+            name={item.name}
+            plantImg={props.countryList[props.countryList.findIndex(country => country.origin === item.origin)].cpImg}
+            origin={item.origin}
+            roast={item.roast}
+            description={item.description}
+            price={item.price}
+            quantity={item.quantity}
+            id={item.id}
+            key={item.id} 
+            detailPg={true}
+          />
         </div>
-        <div className="button-column"style={buttonStyles}>
+        <div className="detailPriceContainer">  
+          <h3 className="cardSubHead" id="detailQuantity">available:&nbsp;&nbsp;<span className="subHeadText">{item.quantity} lbs</span></h3>
+          <h3 className="cardSubHead" id="detailPriceSubhead">price per pound:&nbsp;&nbsp;<span className="cardPrice">${item.price}</span></h3>
+        </div>
+        <div className="detailFlagContainer" id="detailFlagImg" >
+          <img className="flag" src={props.countryList[props.countryList.findIndex(country => country.origin === item.origin)].flag} alt="coffee plantation in Colombia" />
+        </div>
+
+        <div className="addCartContainer"style={buttonStyles}>
 
           {/* <button onClick={() => onBuyingItem(1)}>Buy 1 pound</button> */}
           <form onSubmit={ handleQuantityForm }>
-            <input 
-              className="input-quantity"
-              type='number'
-              name='quantity'
-              max={item.quantity}
-              placeholder="Purchase Quantity"
-            /><br /><br />
-            <button type="submit">Buy Beans</button>
-          </form><br /><br /><br />
-          <button onClick={onClickingEdit}>Edit Bean</button><br /><br />
-          <button onClick={() => onClickingDelete(item.id)}>Delete Bean</button>
+            <div className="inputRow">
+              <h3 className="cardSubHead" id="inputSubhead">Quantity:</h3>
+              <input 
+                className="input-quantity"
+                type=''
+                name='quantity'
+                max={item.quantity}
+                placeholder="1"
+              />
+            </div>
+            <button type="submit" className="cartButton"><span className="buttonTextSolid">Add to Cart</span></button>
+          </form>
+          {/* <button onClick={onClickingEdit}>Edit Bean</button><br /><br />
+          <button onClick={() => onClickingDelete(item.id)}>Delete Bean</button> */}
         </div> 
       </div>
     </React.Fragment>
