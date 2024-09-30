@@ -17,6 +17,7 @@ import indiaFlag from "./../img/indiaFlag.png";
 import philImg from "./../img/pcp.png";
 import philFlag from "./../img/philFlag.png";
 import closeIcon from "./../img/closeIcon.png";
+import narrowIndex from "./../img/indexCardNarrow.webp";
 
 class MenuController extends React.Component {
 
@@ -25,6 +26,7 @@ class MenuController extends React.Component {
     this.state = {
       newItemFormVisible: false,
       editItemFormVisible: false,
+      deleteWarningVisible: false,
       selectedItem: null,
       itemsList: [ { name: 'Arabica', origin: 'Colombia', roast: 'medium', description: 'Our Arabica beans produce the highest-quality coffee, smooth and sweet with complex and intricate flavor undertones that may include fruit, sugar or chocolate. They will usually contain just enough acidity and very little bitterness.', price: 15, quantity: 130, notification: '', id: v4() }, { name: 'Robusta', origin: 'Brazil', roast: 'dark', description: 'Robusta coffee is stronger with a heavier body. It has a slight-bitter taste, but still smooth and robust with a fragrant aroma. It\'s deep flavor profile stands up well to creamer, milk, sugar, and other added ingredients.', price: 14, quantity: 130, notification: "", id: v4() }, { name: 'Liberica', origin: 'Phillipines', roast: 'light', description: 'A less caffeinated bean, with a nutty bold taste, and a floral aroma. It\'s unique profile is suited to those looking for a lighter cup of coffee, but enjoy the unique flavor notes this been produces. ', price: 17, quantity: 130, notification: "", id: v4() }, { name: 'Excelsa', origin: 'India', roast: 'light', description: 'Our excelsa beans have a tart, fruity flavor for a light roast, but with additional notes that are more like those you\'d find in a dark roast. This exceptional bean is a rare treat, many feel it produces the tastiest of cup of coffee.', price: 21, quantity: 130, notification: "", id: v4() } ],
       countryList: [ 
@@ -70,12 +72,30 @@ class MenuController extends React.Component {
     });
   }
 
+  handleCancelingEditForm = () => {
+    this.setState({
+      editItemFormVisible: false
+    });
+  }
+
+  handleCancelingDelete = () => {
+    this.setState({
+      deleteWarningVisible: false
+    })
+  }
+
+  handleDeletingWarning = () => {
+    this.setState({
+      deleteWarningVisible: true
+    });
+  }
+
   handleDeletingItem = (itemId) => {
-    console.log(this.state.itemsList);
     const newItemsList = this.state.itemsList.filter(item => item.id !== itemId);
     this.setState({
       itemsList: newItemsList,
-      selectedItem: null
+      selectedItem: null,
+      deleteWarningVisible: false
     });
   }
 
@@ -127,21 +147,45 @@ class MenuController extends React.Component {
               }
             /> 
           </div>
-            {
+          <div className="centerPageBottom">
+            <React.Fragment>
+              <ItemsList itemsList={ this.state.itemsList } 
+                        onItemSelection={ this.handleChangingSelectedItem } 
+                        countryList={ this.state.countryList } />
+
+            </React.Fragment>
+          </div>
+          {
+            this.state.deleteWarningVisible ?
+              <React.Fragment>
+                <div className="container-details">
+                  <div className="deleteWarning">
+                    <p className="deleteWarningText">Are you sure you want to delete {this.state.selectedItem.name}? </p>
+                    <div className="deleteWdgButtons">
+                      <button type="submit" className="cancelButton" onClick={this.handleCancelingDelete}><span className="buttonText">Cancel</span></button>
+                      <button type="submit" className="deleteButton" onClick={() => this.handleDeletingItem(this.state.selectedItem.id)}><span className="buttonTextSolid">Delete Bean</span></button>
+                    </div>
+                  </div>
+                </div>
+              </React.Fragment>
+            :
             this.state.editItemFormVisible ?
               <React.Fragment>
-                <div className="form">
-                  <div className="returnButton">
-                    <button onClick={ this.handleReturningToList }>Return to Bean List</button>
-                  </div>
-                  <EditItemForm item={ this.state.selectedItem }
-                                onEditingItem={ this.handleEditingItem } />
+                <div className="container-details">
+
+                    <div className="returnButton">
+                      <button onClick={ this.handleCancelingEditForm }>Return to Bean List</button>
+                    </div>
+                    <EditItemForm item={ this.state.selectedItem }
+                                  countryList={ this.state.countryList }
+                                  onEditingItem={ this.handleEditingItem } />
+                
                 </div>
               </React.Fragment>
             :
             this.state.selectedItem !== null ?
               <React.Fragment>
-                
+              
                 <div className="container-details">
                   <div className="detBtn"> 
                     <img src={closeIcon} onClick={ this.handleReturningToList } />
@@ -152,6 +196,16 @@ class MenuController extends React.Component {
                               onClickingEdit={ this.handleEditClick } 
                               onBuyingItem={ this.handleBuyingClick } 
                               onQuantityCreation={ this.handleBuyingClick } />
+                  <div className="indexEditWidget">
+                    <img src={narrowIndex} className="indexNarrow" />
+                    <div className="editWidgetContainer">
+                      <h2 className="editWdgHeader">{this.state.selectedItem.name}</h2>
+                      <div className="editWidgetActions">
+                        <h3 className="widgetLink" id="editLinkA" onClick={this.handleEditClick}>+ edit details</h3>
+                        <h3 className="widgetLink" id="editLinkB" onClick={this.handleDeletingWarning}><a>- delete bean</a></h3>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </React.Fragment>
             :
@@ -164,16 +218,8 @@ class MenuController extends React.Component {
                   <NewItemForm onNewItemCreation={ this.handleAddingNewItem } />
                 </div>
               </React.Fragment>
-            :
-            <div className="centerPageBottom">
-              <React.Fragment>
-                <ItemsList itemsList={ this.state.itemsList } 
-                          onItemSelection={ this.handleChangingSelectedItem } 
-                          countryList={ this.state.countryList } />
-
-              </React.Fragment>
-            </div>
-            }
+            : null
+          }
           <div className="rightPage">
             <div className="cartContainer">
               <h3 className="cart">cart</h3>

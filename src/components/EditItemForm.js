@@ -22,19 +22,28 @@ function EditItemForm(props) {
 
   return (
     <React.Fragment>
-      <div className="formCard">
       <ReusableForm 
         formSubmissionHandler={handleEditItemSubmission}
-        buttonText="Edit Bean" 
-        headerText="EDIT BEAN" />
-      </div>
+        buttonText="Save Changes" 
+        headerText="EDIT BEAN" 
+        name={item.name}
+        flag={props.countryList[props.countryList.findIndex(country => country.origin === item.origin)].flag}
+        plantImg={props.countryList[props.countryList.findIndex(country => country.origin === item.origin)].cpImg}
+        origin={item.origin}
+        roast={item.roast}
+        description={item.description}
+        price={item.price}
+        quantity={item.quantity}
+        id={item.id}
+        key={item.id}/>
     </React.Fragment>
   );
 }
 
 EditItemForm.propTypes = {
   onEditingItem: PropTypes.func,
-  item: PropTypes.object
+  item: PropTypes.object,
+  countryList: PropTypes.object
 };
 
 export default EditItemForm;

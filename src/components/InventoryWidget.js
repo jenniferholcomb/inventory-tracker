@@ -5,8 +5,6 @@ function InventoryWidget(props) {
   console.log(props)
   return (
     <React.Fragment>
-      
-        
         <div className="inventory">
           <h2 className="inventoryHeader">Inventory</h2>
           <div className="widgetActions">

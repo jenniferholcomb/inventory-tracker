@@ -12,7 +12,7 @@ function Item(props) {
     : "";
 
   return (
-    <div onClick = {() => props.whenItemClicked(props.id)}>
+    <div onClick = {props.detailPg ? null : () => props.whenItemClicked(props.id)}>
       <div className={props.detailPg ? "details-info" : "itemCard"}>
         <div className="cardImgContainer" id={props.detailPg ? "detailImg" : null}>
           <img className={props.detailPg ? "" : "cardImg"} src={props.plantImg} alt="coffee plantation in Colombia" />
