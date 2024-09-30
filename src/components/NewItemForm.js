@@ -23,15 +23,17 @@ function NewItemForm(props) {
     <React.Fragment>
       <div className="formCard">
       <ReusableForm formSubmissionHandler={ handleNewItemFormSubmission } 
-                    buttonText="Add Bean" 
-                    headerText="UPDATE BEAN" />
+                    // onClickingCancel={onClickingCancel}
+                    buttonText="Save" 
+                    headerText="Add new bean" />
       </div>
     </React.Fragment>
   );
 }
 
 NewItemForm.propTypes ={
-  onNewItemCreation: PropTypes.func
+  onNewItemCreation: PropTypes.func,
+  onClickingCancel: PropTypes.func
 };
 
 export default NewItemForm;

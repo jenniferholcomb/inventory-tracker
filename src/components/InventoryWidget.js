@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from 'prop-types';
 
 function InventoryWidget(props) {
-  console.log(props)
+
   return (
     <React.Fragment>
         <div className="inventory">

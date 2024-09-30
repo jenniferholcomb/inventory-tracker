@@ -19,7 +19,7 @@ function Item(props) {
         </div>
         <div className="content" id={props.detailPg ? "detailContent" : null}>
           <div className="cardTopContainer">
-            <h1 className="cardHeader" id={props.detailPg ? "detailHeader" : null}>{props.name}</h1>
+            <h1 className="cardHeader" id={props.detailPg ? "detailHeader" : null} lang="en">{props.name}</h1>
             <h3 className="cardSubHead">ORIGIN:&nbsp;&nbsp;<span className="subHeadText">{props.origin}</span></h3>
             <h3 className="cardSubHead">ROAST:&nbsp;&nbsp;<span className="subHeadTextB">{props.roast}</span></h3>
             <h3 className="cardSubHead" id="desSubHead">DESCRIPTION:</h3>

@@ -7,13 +7,14 @@ function EditItemForm(props) {
   const { item } = props;
 
   function handleEditItemSubmission(event) {
+    console.log(event.currentTarget)
     event.preventDefault();
     props.onEditingItem({
-      name: event.target.name.value,
-      origin: event.target.origin.value,
-      roast: event.target.roast.value,
-      description: event.target.description.value,
-      price: parseInt(event.target.price.value),
+      name: event.currentTarget.form.name.value,
+      origin: event.currentTarget.form.origin.value,
+      roast: event.currentTarget.form.roast.value,
+      description: event.currentTarget.form.description.value,
+      price: parseInt(event.currentTarget.form.price.value),
       quantity: item.quantity,
       notification: item.notification,
       id: item.id
@@ -45,7 +46,7 @@ EditItemForm.propTypes = {
   onEditingItem: PropTypes.func,
   onClickingCancel: PropTypes.func,
   item: PropTypes.object,
-  countryList: PropTypes.object
+  countryList: PropTypes.array
 };
 
 export default EditItemForm;

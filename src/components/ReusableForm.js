@@ -1,8 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from 'prop-types';
+import styles from './../index.css';
 
 function ReusableForm(props) {
   console.log(props)
+
+  const [nameText, setNameText] = useState(props.name.length);
+  const [descText, setDescText] = useState(props.description.length);
+  const [roastValue, setRoastValue] = useState('');
+  const [originValue, setOriginValue] = useState(props.origin);
+  const nameMaxLength = 40;
+  const descMaxLength = 259;
+
+  const handleChange = (event) => {
+    event.target.name === "name" ?
+      setNameText(event.target.value.length)
+    : event.target.name === "description" ?
+        setDescText(event.target.value.length)
+      :
+        setRoastValue(event.target.value);
+  };
+
+  // const handleRoastChange = (event) => {
+  //   setRoastValue(event.target.value);
+  // }
+
   return (
     <React.Fragment>
       <div className="formCard">
@@ -21,61 +43,75 @@ function ReusableForm(props) {
                   type='text'
                   className='nameInput'
                   name='name'
-                  placeholder={props.name ? props.name : 'Name'} required
+                  // placeholder={props.name ? props.name : 'Name'} required
+                  defaultValue={props.name ? props.name : 'Name'}
+                  onChange={handleChange}
+                  maxLength={nameMaxLength}
                 />
               </div>
-              <h5 className="characterCountText">8 / 20 characters</h5>
+              <h5 className="characterCountText">{nameText} / {nameMaxLength} characters</h5>
               <div className="formLine">
-                <label htmlFor="name">ORIGIN: </label>
-                {/* <div className="inputDiv"> */}
-                  <input 
-                    type='text'
-                    className='nameInput'
-                    name='origin'
-                    placeholder={props.name ? props.origin : "Origin"} required
-                  />
-                {/* </div> */}
+                <label htmlFor="origin">ORIGIN: </label>
+                <select 
+                  name='origin' 
+                  value={roastValue} 
+                  onChange={handleChange} 
+                  className={`styles.nameInput styles.originInput ${originValue === "Brazil" ? styles.nameInputBrazil : null} }`}>
+                  <option value="Brazil">Brazil</option>
+                  <option value="Colombia">Colombia</option>
+                  <option value="India">India</option>
+                  <option value="Phillipines">Phillipines</option>
+                </select>
               </div>
               <div className="formLine">
-                <label htmlFor="name">ROAST: </label>
-                <input 
-                  type='text'
-                  className='nameInput'
-                  name='roast'
-                  placeholder={props.name ? props.roast : 'Roast'} required
-                />
+                <label htmlFor="roast">ROAST: </label>
+                <select 
+                  name='roast' 
+                  defaultValue={props.name ? props.roast : 'Roast'} 
+                  value={roastValue} 
+                  onChange={handleChange} 
+                  className={`${'nameInput'} ${'roastInput'}`}>
+                  <option value="light">light</option>
+                  <option value="medium">medium</option>
+                  <option value="dark">dark</option>
+                </select>
               </div>
               <div className="formDescription">
                 <div className="descLab"> 
-                  <label htmlFor="name">DESCRIPTION: </label>
+                  <label htmlFor="description">DESCRIPTION: </label>
                 </div>
                 <textarea 
                   name='description'
                   className='descriptForm'
                   placeholder={props.name ? props.description : 'Description'} required
+                  defaultValue={props.name ? props.description : 'Description'}
+                  onChange={handleChange}
+                  maxLength={descMaxLength}
                 />
               </div>
-              <h5 className="characterCountText">183 / 259 characters</h5>
+              <h5 className="characterCountText">{descText} / 259 characters</h5>
             </div>
             <div className="formPrice">
               <div className="formLine">
-                <label htmlFor="name">PRICE PER POUND: </label>
+                <label htmlFor="price">PRICE PER POUND: </label>
                 <input 
                   type='text'
                   className='priceQuantityInput'
                   name='price'
                   placeholder={props.name ? (`$${props.price}`) : 'Price'} required
+                  defaultValue={props.name ? (`$${props.price}`) : 'Price'}
                 />
               </div>
             </div>
             <div className="formCol2Content">
               <div className="formLine">
-                <label htmlFor="name">POUNDS AVAILABLE: </label>
+                <label htmlFor="available">POUNDS AVAILABLE: </label>
                 <input 
                   type='text'
                   className='priceQuantityInput'
                   name='quantity'
                   placeholder={props.name ? props.quantity : 'Quantity Available'} required
+                  defaultValue={props.name ? props.quantity : 'Quantity Available'}
                 />
               </div>
             </div>
@@ -98,7 +134,7 @@ function ReusableForm(props) {
           </div>
         </form>
         <div className="btn1">
-          <button className="cancelFormButton" id="formCancelButton" onClick={props.onClickingCancel}><span className="buttonText">Cancel</span></button>
+          <button className="cancelFormButton" id="formCancelButton"><span className="buttonText">Cancel</span></button>
         </div>
       </div>
     </React.Fragment>
