@@ -174,11 +174,11 @@ class MenuController extends React.Component {
                 <div className="container-details">
 
                     <div className="returnButton">
-                      <button onClick={ this.handleCancelingEditForm }>Return to Bean List</button>
                     </div>
                     <EditItemForm item={ this.state.selectedItem }
                                   countryList={ this.state.countryList }
-                                  onEditingItem={ this.handleEditingItem } />
+                                  onEditingItem={ this.handleEditingItem } 
+                                  onClickingCancel={ this.handleCancelingEditForm } />
                 
                 </div>
               </React.Fragment>

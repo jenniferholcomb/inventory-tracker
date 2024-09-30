@@ -24,6 +24,7 @@ function EditItemForm(props) {
     <React.Fragment>
       <ReusableForm 
         formSubmissionHandler={handleEditItemSubmission}
+        onClickingCancel={props.onClickingCancel}
         buttonText="Save Changes" 
         headerText="EDIT BEAN" 
         name={item.name}
@@ -42,6 +43,7 @@ function EditItemForm(props) {
 
 EditItemForm.propTypes = {
   onEditingItem: PropTypes.func,
+  onClickingCancel: PropTypes.func,
   item: PropTypes.object,
   countryList: PropTypes.object
 };
