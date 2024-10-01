@@ -15,7 +15,7 @@ function EditItemForm(props) {
       roast: event.currentTarget.form.roast.value,
       description: event.currentTarget.form.description.value,
       price: parseInt(event.currentTarget.form.price.value),
-      quantity: item.quantity,
+      quantity: parseInt(event.currentTarget.form.quantity.value),
       notification: item.notification,
       id: item.id
     })

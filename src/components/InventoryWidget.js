@@ -7,10 +7,6 @@ function InventoryWidget(props) {
     <React.Fragment>
         <div className="inventory">
           <h2 className="inventoryHeader">Inventory</h2>
-          <div className="widgetActions">
-            <h3 className="widgetLink"><a href="">+ add inventory</a></h3>
-            <h3 className={`${"widgetLink"} ${"linkB"}` } onClick={props.onAddBeanClick}><a>+ add new bean</a></h3>
-          </div>
           <div className="inv-1">
           {props.itemsList.map((item, index) => 
             <React.Fragment key={item.id}>
@@ -19,6 +15,9 @@ function InventoryWidget(props) {
               {/* <br /> */}
             </React.Fragment>
           )}
+          </div>
+          <div className="widgetActions">
+            <h3 className="widgetLink" onClick={props.onAddBeanClick}><a>+ add new bean</a></h3>
           </div>
         </div>
       

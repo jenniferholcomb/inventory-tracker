@@ -11,7 +11,6 @@ function Header(props) {
           <div className="logoContainer">
             <img className="logo" src={logo} alt="Terra Bean Coffee Co logo" />
           </div>
-          <div className="inventory-widget"> </div>
             {props.widgetAreaComponent}
           {/* </div> */}
         </div>

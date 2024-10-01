@@ -24,6 +24,7 @@ class MenuController extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      menuBarVisible: false,
       newItemFormVisible: false,
       editItemFormVisible: false,
       deleteWarningVisible: false,
@@ -37,8 +38,19 @@ class MenuController extends React.Component {
     };
   }
 
+  handleMenuClick = () => {
+    this.setState(prevState => ({
+      menuBarVisible: !prevState.menuBarVisible
+    }));
+  }
+
+  handleExitMenu = () => {
+    this.setState({
+      menuBarVisible: false
+    })
+  }
+
   handleClick = () => {
-    console.log("we made it")
     this.setState(prevState => ({ 
       newItemFormVisible: !prevState.newItemFormVisible 
     }));
@@ -134,18 +146,9 @@ class MenuController extends React.Component {
       <React.Fragment>
         <div className="appContainer">
           <div className="leftPage">
-            <div className="menuIconContainer">
-              <svg className="menuIcon" xmlns="http://www.w3.org/2000/svg" width="20" height="13" viewBox="0 0 20 13" fill="none">
-                <path d="M0 13V10.8333H20V13H0ZM0 7.58333V5.41667H20V7.58333H0ZM0 2.16667V0H20V2.16667H0Z" fill="#343434"/>
-              </svg>
-            </div>
           </div>
           <div className="centerPage"> 
-            <Header widgetAreaComponent=
-              { <InventoryWidget itemsList={ this.state.itemsList } 
-                                 onAddBeanClick={ this.handleClick } />
-              }
-            /> 
+            <Header /> 
           </div>
           <div className="centerPageBottom">
             <React.Fragment>
@@ -230,6 +233,42 @@ class MenuController extends React.Component {
           </div>
           <div className="footer">
             <h4 className="footerText">Crafted with care, from earth to cup</h4>
+          </div>
+          {
+            this.state.menuBarVisible ?
+              <React.Fragment>
+                <div id="menuBar"></div>
+                <div id="menuScreen" onClick={this.handleExitMenu}></div>
+              </React.Fragment>
+            :
+              null
+          }
+          <div onClick={this.handleMenuClick} className="menuIconContainer">
+            {
+              this.state.menuBarVisible ?
+                <React.Fragment>
+                  <div className="closeIcon"> 
+                    <img src={closeIcon} onClick={ this.handleReturningToList } />
+                  </div>
+
+                    <ul className="menuContent">
+                      <li className="menuList">cart</li>
+                      <li className="menuList">products</li>
+                      <li className="menuList">shop</li>
+                      <li className="menuList">about us</li>
+                      <li className="menuList">contact</li>
+                    </ul>
+                 
+                  <div className="inventory-widget"> </div>
+                  <InventoryWidget itemsList={ this.state.itemsList } 
+                                   onAddBeanClick={ this.handleClick } />
+                </React.Fragment>
+                
+              :
+                <svg className="menuIcon" xmlns="http://www.w3.org/2000/svg" width="20" height="13" viewBox="0 0 20 13" fill="none">
+                  <path d="M0 13V10.8333H20V13H0ZM0 7.58333V5.41667H20V7.58333H0ZM0 2.16667V0H20V2.16667H0Z" fill="#343434"/>
+                </svg>
+            }
           </div>
         </div>
       </React.Fragment>
