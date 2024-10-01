@@ -28,6 +28,7 @@ function EditItemForm(props) {
         onClickingCancel={props.onClickingCancel}
         buttonText="Save Changes" 
         headerText="EDIT BEAN" 
+        originImg={props.countryList}
         name={item.name}
         flag={props.countryList[props.countryList.findIndex(country => country.origin === item.origin)].flag}
         plantImg={props.countryList[props.countryList.findIndex(country => country.origin === item.origin)].cpImg}

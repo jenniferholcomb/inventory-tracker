@@ -728,15 +728,15 @@ input .input-quantity  {
 
 .formHeader {
   color: rgba(133, 126, 117);
-  font-family: Mulish;
+  /* font-family: Mulish;
   font-size: 18px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
   letter-spacing: 1.26px;
   text-transform: uppercase;
-  /* text-align: center; */
-  margin: 30px 0 12px 35px;
+  text-align: center; */
+  margin: 40px 0 0px 35px;
 }
 
 .breakLine1 {
@@ -745,19 +745,12 @@ input .input-quantity  {
   margin: 0 35px 0 35px;
 }
 
-.breakLine2, .breakLine3 {
+.breakLine3 {
   grid-column: 1 / span 2;
+  grid-row: 3;
   max-width: 100%;
   max-height: 1px;
   margin: 0 35px 0 35px;
-}
-
-.breakLine2 {
-  grid-row: 2;
-}
-
-.breakLine3 {
-  grid-row: 4;
 }
 
 .reuseForm {
@@ -781,23 +774,24 @@ input .input-quantity  {
 
 .formCol2Content {
   grid-column: 2;
-  grid-row: 3;
-  padding: 25px 35px 12px 32px;
+  grid-row: 2;
+  padding: 5px 43px 8px 32px;
   max-width: 100%;
   max-height: 100%;
 }
 
 .formPrice {
   grid-column: 1;
-  grid-row: 3;
-  padding: 25px 0 12px 35px;
+  grid-row: 2;
+  padding: 5px 0 8px 35px;
+  margin-right: 6px;
 }
 
 .formLine {
   display:  flex;
   flex-direction: row;
   align-items: center;
-  width: 100%;
+  max-width: 100%;
   padding-top: 11px;
 }
 
@@ -822,7 +816,7 @@ input .input-quantity  {
 .formDescription {
   display: flex;
   flex-direction: column;
-  padding-top: 11px;
+  padding-top: 15px;
 }
 
 .descLab {
@@ -856,6 +850,10 @@ label {
   line-height: normal;
   letter-spacing: 0.84px;
   text-transform: uppercase;
+}
+
+label.available {
+  letter-spacing: 0.22px;
 }
 
 input.nameInput {
@@ -901,22 +899,6 @@ select.originInput {
   padding-left: 45px;
 }
 
-select.nameInputBrazil {
-  background-image: url("./img/brazilFlag.png"), url("./img/green-caret.svg");
-}
-
-select.nameInputColombia {
-  background-image: url("./img/colombiaFlag.png"), url("./img/green-caret.svg");
-}
-
-select.nameInputIndia {
-  background-image: url("./img/indiaFlag.png"), url("./img/green-caret.svg");
-}
-
-select.nameInputPhillipines {
-  background-image: url("./img/philFlag.png"), url("./img/green-caret.svg");
-}
-
 select.roastInput {
   background-image: url("./img/green-caret.svg");
   background-size: 15px;
@@ -924,7 +906,26 @@ select.roastInput {
   background-position: calc(100% - 10px) 68%;
 }
 
-input.priceQuantityInput {
+.currencyIcon {
+  position: relative;
+}
+
+.currencyIcon::before {
+  position: absolute;
+  content: '$';
+  top: 6px;
+  left: 31px;
+  z-index: 9999;
+  color: #000;
+  font-family: Mulish;
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 0.28px;
+}
+
+input.priceQuantityInput1 {
   width: 100px !important;
   height: 25px !important;
   border-radius: 20px;
@@ -939,6 +940,48 @@ input.priceQuantityInput {
   letter-spacing: 0.28px;
   padding: 0;
   text-align: center;
+}
+
+input.priceQuantityInput2 {
+  width: 100px !important;
+  height: 25px !important;
+  border-radius: 20px;
+  border: 1px solid #468E54;
+  background: #FFFFFD;
+  color: #000;
+  font-family: Mulish;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 0.28px;
+  padding: 0;
+  text-align: center;
+}
+
+#increment, #decrement {
+  outline: none;
+  background: transparent;
+  border: 1px solid transparent;
+  color: #468E54;
+  font-family: Mulish;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 800;
+}
+
+#decrement {
+  display: inline-block;
+  margin-right: -25px;
+  margin-top: -4px;
+  z-index: 999;
+}
+
+#increment {
+  display: inline-block;
+  margin-left: -25px;
+  margin-top: -4px;
+  z-index: 999;
 }
 
 .formImage {
@@ -957,23 +1000,6 @@ input.priceQuantityInput {
   padding: 43px 35px 35px 35px;
   max-width: 100%;
 }
-/* .form {
-  display: grid;
-  grid-template-columns: repeat(6, minmax(0, 1fr));
-} */
-
-/* button {
-  font-size: 14px;
-  font-weight: 600;
-  text-transform: uppercase;
-  outline: none;
-  border-top: none;
-  border-left: none;
-  background-color: rgb(210, 204, 249);
-  border-width: 1px; 
-  border-color: rgba(0, 0, 0, 0.37);
-  box-shadow: 3px 5px 10px 0 rgba(247, 243, 243, 0.459), 3px 3px 2px 0 rgba(4, 4, 3, 0.3);
-} */
 
 button:hover {
   transform: scale(1.04);
@@ -1117,17 +1143,18 @@ textarea {
 }
 
 .btn1 {
-  position: absolute;
+  grid-column: 1;
+  grid-row: 4;
   bottom: 10%;
-  padding: 43px 0px 35px 35px;
+  padding: 35px 0px 48px 35px;
   max-width: 100%;
 }
 
 .btn2 {
-  /* grid-column: 2;
-  grid-row: 5; */
+  grid-column: 2;
+  grid-row: 4;
   display: grid;
-  padding: 43px 35px 37px 0px;
+  padding: 35px 35px 48px 0px;
   max-width: 100%;
   justify-content: end;
 }
@@ -1145,3 +1172,17 @@ textarea {
   border: none;
   box-shadow: 0px 4px 7.2px 0px rgba(10, 9, 9, 0.30);
 }
+
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+

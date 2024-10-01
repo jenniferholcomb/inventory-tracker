@@ -172,13 +172,10 @@ class MenuController extends React.Component {
             this.state.editItemFormVisible ?
               <React.Fragment>
                 <div className="container-details">
-
-                    <div className="returnButton">
-                    </div>
-                    <EditItemForm item={ this.state.selectedItem }
-                                  countryList={ this.state.countryList }
-                                  onEditingItem={ this.handleEditingItem } 
-                                  onClickingCancel={ this.handleCancelingEditForm } />
+                  <EditItemForm item={ this.state.selectedItem }
+                                countryList={ this.state.countryList }
+                                onEditingItem={ this.handleEditingItem } 
+                                onClickingCancel={ this.handleCancelingEditForm } />
                 
                 </div>
               </React.Fragment>
@@ -199,7 +196,7 @@ class MenuController extends React.Component {
                   <div className="indexEditWidget">
                     <img src={narrowIndex} className="indexNarrow" />
                     <div className="editWidgetContainer">
-                      <h2 className="editWdgHeader">{this.state.selectedItem.name}</h2>
+                      <h2 className="editWdgHeader">admin actions</h2>
                       <div className="editWidgetActions">
                         <h3 className="widgetLink" id="editLinkA" onClick={this.handleEditClick}>+ edit details</h3>
                         <h3 className="widgetLink" id="editLinkB" onClick={this.handleDeletingWarning}><a>- delete bean</a></h3>
