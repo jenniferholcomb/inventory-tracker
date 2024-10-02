@@ -31,6 +31,7 @@ class MenuController extends React.Component {
       deleteWarningVisible: false,
       cartVisible: false,
       selectedItem: null,
+      cartItems: [],
       itemsList: [ { name: 'Arabica', origin: 'Colombia', roast: 'medium', description: 'Our Arabica beans produce the highest-quality coffee, smooth and sweet with complex and intricate flavor undertones that may include fruit, sugar or chocolate. They will usually contain just enough acidity and very little bitterness.', price: 15, quantity: 130, notification: '', id: v4() }, { name: 'Robusta', origin: 'Brazil', roast: 'dark', description: 'Robusta coffee is stronger with a heavier body. It has a slight-bitter taste, but still smooth and robust with a fragrant aroma. It\'s deep flavor profile stands up well to creamer, milk, sugar, and other added ingredients.', price: 14, quantity: 130, notification: "", id: v4() }, { name: 'Liberica', origin: 'Phillipines', roast: 'light', description: 'A less caffeinated bean, with a nutty bold taste, and a floral aroma. It\'s unique profile is suited to those looking for a lighter cup of coffee, but enjoy the unique flavor notes this been produces. ', price: 17, quantity: 130, notification: "", id: v4() }, { name: 'Excelsa', origin: 'India', roast: 'light', description: 'Our excelsa beans have a tart, fruity flavor for a light roast, but with additional notes that are more like those you\'d find in a dark roast. This exceptional bean is a rare treat, many feel it produces the tastiest of cup of coffee.', price: 21, quantity: 130, notification: "", id: v4() } ],
       countryList: [ 
                   {origin: 'Colombia', flag: colFlag, cpImg: colImg, cpImgNo: colImgNo}, 
@@ -132,21 +133,29 @@ class MenuController extends React.Component {
     });
   }
 
-  handleBuyingClick = (quantityPurchased) => {
-    console.log(quantityPurchased);
-    const purchasedItem = this.state.itemsList.filter(item => item.id === this.state.selectedItem.id)[0];
-    purchasedItem.quantity -= quantityPurchased;
-    const newItemsList = [...this.state.itemsList];
-    const index = this.state.itemsList.indexOf(this.state.selectedItem);
-    newItemsList.splice(index, 1, purchasedItem);
+  handleCheckingOut = () => {
+    // const purchasedItem = this.state.itemsList.filter(item => item.id === this.state.selectedItem.id)[0];
+    // purchasedItem.quantity -= quantityPurchased;
+    // const newItemsList = [...this.state.itemsList];
+    // const index = this.state.itemsList.indexOf(this.state.selectedItem);
+    // newItemsList.splice(index, 1, purchasedItem);
 
-    purchasedItem.notification = (purchasedItem.quantity === 0) ? "OUT OF STOCK" :
-    (purchasedItem.quantity <= 10) ? "ALMOST SOLD OUT!" : "" ;
+    // purchasedItem.notification = (purchasedItem.quantity === 0) ? "OUT OF STOCK" :
+    // (purchasedItem.quantity <= 10) ? "ALMOST SOLD OUT!" : "" ;
 
+    // this.setState({
+    //   itemsList: newItemsList,
+    //   selectedItem: null
+    // });
+  }
+
+  handleBuyingClick = (newCartItem) => {
+    const newCartItemsList = [...this.state.cartItems, newCartItem];
     this.setState({
-      itemsList: newItemsList,
+      cartItems: newCartItemsList,
       selectedItem: null
     });
+    console.log(newCartItemsList)
   }
 
   render() {
@@ -173,7 +182,8 @@ class MenuController extends React.Component {
                   <div className="detBtn"> 
                     <img src={closeIcon} onClick={ this.handleCartClick } />
                   </div>
-                  <Cart />
+                  <Cart cartList={this.state.cartItems}
+                        onClickingCheckout={this.handleCheckingOut}/>
                 </div>
               </React.Fragment>
             :
@@ -212,7 +222,7 @@ class MenuController extends React.Component {
                               countryList={ this.state.countryList }
                               onClickingDelete={ this.handleDeletingItem }
                               onClickingEdit={ this.handleEditClick } 
-                              onBuyingItem={ this.handleBuyingClick } 
+                              onNewCartItem={ this.handleBuyingClick } 
                               onQuantityCreation={ this.handleBuyingClick } />
                   <div className="indexEditWidget">
                     <img src={narrowIndex} className="indexNarrow" />

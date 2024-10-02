@@ -177,16 +177,29 @@ code {
   top: 18%;
 }
 
+/* .cartCard {
+  display: grid;
+  grid-template-columns: 1fr;
+  height: 100%;
+} */
+
+.cartHeader {
+  grid-row: 1;;
+}
+
 .cartContents {
+  grid-row: 4;
   max-width: 100%;
-  height: 10rem;
   padding: 18px 35px 0 35px;
+  max-height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .contentCategories {
-  display: flex;
-  flex-direction: row;
-  width: 100%;
+  display: grid;
+  grid-template-columns: 70% 15% 15%;
+  max-width: 100%;
 }
 
 .categoryHeader {
@@ -202,27 +215,168 @@ code {
   width: 100%;
 }
 
+.product {
+  grid-column: 1;
+}
+
 .quantity {
+  grid-column: 2;
   text-align: end;
 }
 
 .total {
-  width: 70%;
+  grid-column: 3;
+  text-align: end;
+}
+
+.cartGroup {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.cartItemContainer {
+  display: grid;
+  grid-template-columns: 70% 15% 15%;
+  padding: 0px 0 20px 0;
+  width: 100;
+}
+
+.cartItemDescription {
+  grid-column: 1;
+  display: flex;
+  flex-direction: row;
+}
+
+.cartImg {
+  max-width: 44px;
+  max-height: 50px;
+  align-self: center;
+}
+
+.productContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-self: center;
+  padding-left: 14px;
+}
+
+.cartName, .cartOriginRoast, .cartPrice, .cartProductTotal {
+  color: #000;
+  font-family: Mulish;
+  font-style: normal;
+  line-height: normal;
+  margin: 0;
+}
+
+.cartName {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.98px;
+  text-transform: uppercase;
+}
+
+.cartOriginRoast {
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.36px;
+}
+
+.cartPrice {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.84px;
+}
+
+.quantityContainer {
+  grid-column: 2;
+  align-self: center;
+  width: 100%;
+  display: grid;
+  justify-content: end;
+  
+}
+
+.cartInputRow {
+  display: flex;
+  flex-direction: row;
+  padding-right: 5px;
+}
+
+input.cartQuantityInput {
+  width: 70px !important;
+  height: 20px !important;
+  border: none;
+  background: none;
+  color: #000;
+  font-family: Mulish;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  letter-spacing: 0.24px;
+  padding: 0;
+  text-align: center;
+}
+
+#cartIncrement, #cartDecrement {
+  outline: none;
+  background: transparent;
+  border: none;
+  color: #000;
+  font-family: Mulish;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+}
+
+#cartDecrement {
+  display: inline-block;
+  margin-right: -20px;
+  z-index: 999;
+}
+
+#cartIncrement {
+  display: inline-block;
+  margin-left: -20px;
+  z-index: 999;
+}
+
+.cartRemove {
+  color: rgba(93, 91, 91, 0.80);
+  font-family: Mulish;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 300;
+  letter-spacing: 0.3px;
+  margin: 0;
+  text-align: center;
+  padding: 4px 5px 0 0;
+}
+
+.cartProductTotal {
+  grid-column: 3;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.84px;
+  align-self: center;
   text-align: end;
 }
 
 .subtotalRow {
-  display: flex;
-  flex-direction: row;
+  grid-row: 5;
+  max-width: 100%;
+  display: grid;
+  grid-template-columns: 60% 25% 15%;
   padding: 18px 35px 0 35px;
 }
 
 .empty {
-  width: 100%;
+  grid-column: 1;
 }
 
 .subtotalHeader {
-  width: 100%;
+  grid-column: 2;
   color: #000;
   font-family: Mulish;
   font-size: 12px;
@@ -237,7 +391,7 @@ code {
 }
 
 .subtotal {
-  width: 70%;
+  grid-column: 3;
   color: #000;
   font-family: Mulish;
   font-size: 12px;
@@ -252,6 +406,7 @@ code {
 }
 
 .cartButtons {
+  grid-row: 6;
   display: grid;
   grid-template-columns: 50% 50%;
   padding: 46px 35px 35px 35px;
@@ -903,6 +1058,14 @@ input .input-quantity  {
   max-width: 100%;
   max-height: 1px;
   margin: 0 35px 0 35px;
+}
+
+.cartLine1 {
+  grid-row: 2;
+}
+
+.breakLine2 {
+  grid-row: 4;
 }
 
 .breakLine3 {

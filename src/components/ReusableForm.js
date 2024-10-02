@@ -16,8 +16,6 @@ function ReusableForm(props) {
   const descMaxLength = 259;
 
   const handleChange = (event) => {
-
-    
     const { name, value } = event.target;
     console.log(name, value)
     if (name === "name") {
