@@ -133,6 +133,28 @@ class MenuController extends React.Component {
     });
   }
 
+  handleCartQuantityUpdate = (editedCartItem) => {
+    const itemIndex = this.state.cartItems.findIndex(obj => obj.id === editedCartItem.id);
+    const newCartItem = { ...this.state.cartItems[itemIndex], ...editedCartItem };
+    const updatedCartList = [
+      ...this.state.cartItems.slice(0, itemIndex), // Elements before the item
+      newCartItem,                                // The updated item
+      ...this.state.cartItems.slice(itemIndex + 1) // Elements after the item
+    ];
+
+    this.setState({
+      cartItems: updatedCartList
+    });
+  }
+
+  handleCartItemDelete = (deletedId) => {
+    console.log(deletedId)
+    const newCartItemList = this.state.cartItems.filter(e => e.id !== deletedId);
+    this.setState({
+      cartItems: newCartItemList
+    });
+  }
+
   handleCheckingOut = () => {
     // const purchasedItem = this.state.itemsList.filter(item => item.id === this.state.selectedItem.id)[0];
     // purchasedItem.quantity -= quantityPurchased;
@@ -183,6 +205,8 @@ class MenuController extends React.Component {
                     <img src={closeIcon} onClick={ this.handleCartClick } />
                   </div>
                   <Cart cartList={this.state.cartItems}
+                        onEditingCartItem={this.handleCartQuantityUpdate}
+                        onRemovingCartItem={this.handleCartItemDelete}
                         onClickingCheckout={this.handleCheckingOut}/>
                 </div>
               </React.Fragment>

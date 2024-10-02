@@ -352,6 +352,8 @@ input.cartQuantityInput {
   margin: 0;
   text-align: center;
   padding: 4px 5px 0 0;
+  pointer-events: all;
+  cursor: pointer;
 }
 
 .cartProductTotal {

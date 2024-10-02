@@ -4,11 +4,11 @@ import CartItem from "./CartItem";
 
 function Cart(props) {
 
-  const { cartList, onClickingCheckout } = props;
+  const { cartList, onEditingCartItem, onRemovingCartItem, onClickingCheckout } = props;
   const [ productPrice, setProductPrice ] = useState()
-  console.log(cartList)
-  console.log(cartList[0].price)
-  console.log(cartList[0].purchaseQuantity)
+
+
+
   return (
     <React.Fragment>
       <div className={`${"formCard"} ${"cartCard"}`}>
@@ -26,7 +26,9 @@ function Cart(props) {
           </div>
           <div className="cartItemGroup">
             {cartList.map((item, index) => 
-              <CartItem item={item} />
+              <CartItem item={item} 
+                        onEditingQuantity={onEditingCartItem}
+                        onRemovingItem={onRemovingCartItem} />
             )}
           </div>
         </div>
@@ -42,12 +44,12 @@ function Cart(props) {
         </div>
         <div className="cartButtons">
           <div className="updateBtnContainer">
-            <button className="cancelFormButton" id="formCancelButton" type="button" onClick=''><span className="buttonText">Update</span></button>
+            <button className="cancelFormButton" id="formCancelButton" type="button" onClick=''><span className="buttonText">return to store</span></button>
           </div>
           <div className="saveBtnContainer">
             <button className={`${"saveFormButton"} ${"cartSaveButton"}`} id="formSaveButton" type="submit" onClick=''><span className="buttonTextSolid">Checkout</span></button>
           </div>
-          </div>
+        </div>
       </div>
     </React.Fragment>
   );
