@@ -5,6 +5,7 @@ import ItemDetail from "./ItemDetail";
 import NewItemForm from "./NewItemForm";
 import ItemsList from "./ItemsList";
 import InventoryWidget from "./InventoryWidget";
+import Cart from "./Cart";
 import { v4 } from 'uuid';
 
 import colImg from "./../img/colombiaImg.png";
@@ -28,6 +29,7 @@ class MenuController extends React.Component {
       newItemFormVisible: false,
       editItemFormVisible: false,
       deleteWarningVisible: false,
+      cartVisible: false,
       selectedItem: null,
       itemsList: [ { name: 'Arabica', origin: 'Colombia', roast: 'medium', description: 'Our Arabica beans produce the highest-quality coffee, smooth and sweet with complex and intricate flavor undertones that may include fruit, sugar or chocolate. They will usually contain just enough acidity and very little bitterness.', price: 15, quantity: 130, notification: '', id: v4() }, { name: 'Robusta', origin: 'Brazil', roast: 'dark', description: 'Robusta coffee is stronger with a heavier body. It has a slight-bitter taste, but still smooth and robust with a fragrant aroma. It\'s deep flavor profile stands up well to creamer, milk, sugar, and other added ingredients.', price: 14, quantity: 130, notification: "", id: v4() }, { name: 'Liberica', origin: 'Phillipines', roast: 'light', description: 'A less caffeinated bean, with a nutty bold taste, and a floral aroma. It\'s unique profile is suited to those looking for a lighter cup of coffee, but enjoy the unique flavor notes this been produces. ', price: 17, quantity: 130, notification: "", id: v4() }, { name: 'Excelsa', origin: 'India', roast: 'light', description: 'Our excelsa beans have a tart, fruity flavor for a light roast, but with additional notes that are more like those you\'d find in a dark roast. This exceptional bean is a rare treat, many feel it produces the tastiest of cup of coffee.', price: 21, quantity: 130, notification: "", id: v4() } ],
       countryList: [ 
@@ -41,6 +43,12 @@ class MenuController extends React.Component {
   handleMenuClick = () => {
     this.setState(prevState => ({
       menuBarVisible: !prevState.menuBarVisible
+    }));
+  }
+
+  handleCartClick = () => {
+    this.setState(prevState => ({
+      cartVisible: !prevState.cartVisible
     }));
   }
 
@@ -159,6 +167,16 @@ class MenuController extends React.Component {
             </React.Fragment>
           </div>
           {
+            this.state.cartVisible ?
+              <React.Fragment>
+                <div className="container-details">
+                  <div className="detBtn"> 
+                    <img src={closeIcon} onClick={ this.handleCartClick } />
+                  </div>
+                  <Cart />
+                </div>
+              </React.Fragment>
+            :
             this.state.deleteWarningVisible ?
               <React.Fragment>
                 <div className="container-details">
@@ -221,9 +239,9 @@ class MenuController extends React.Component {
             : null
           }
           <div className="rightPage">
-            <div className="cartContainer">
+            <div className="cartContainer" >
               <h3 className="cart">cart</h3>
-              <div className="cartCountContainer">
+              <div className="cartCountContainer" onClick={this.handleCartClick}>
                 <svg className="cartCircle" xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 19 19" fill="none">
                   <circle cx="9.5" cy="9.5" r="9.5" fill="#343434"/>
                 </svg>
