@@ -1,13 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from 'prop-types';
 import CartItem from "./CartItem";
 
 function Cart(props) {
 
-  const { cartList, onEditingCartItem, onRemovingCartItem, onClickingCheckout } = props;
-  const [ productPrice, setProductPrice ] = useState()
-
-
+  const { cartList, onEditingCartItem, onRemovingCartItem, cartTotal, onClickingCheckout } = props;
 
   return (
     <React.Fragment>
@@ -40,7 +37,9 @@ function Cart(props) {
         <div className="subtotalRow">
           <div className="empty"></div>
           <h3 className="subtotalHeader">cart subtotal</h3>
-          <h4 className="subtotal">$56</h4>
+          <h4 className="subtotal">${cartTotal}
+
+          </h4>
         </div>
         <div className="cartButtons">
           <div className="updateBtnContainer">
@@ -57,6 +56,7 @@ function Cart(props) {
 
 Cart.propTypes = {
   cartList: PropTypes.array,
+  cartTotal: PropTypes.number,
   onClickingCheckout: PropTypes.func
 };
 

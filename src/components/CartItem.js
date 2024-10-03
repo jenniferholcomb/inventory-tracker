@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 function CartItem(props) {
 
-  const { item, onEditingQuantity, onRemovingItem } = props;
+  const { item, onEditingQuantity, onRemovingItem, } = props;
   const [quantityValue, setQuantityValue] = useState(item.quantityPurchase);
 
   const handleCartQuantityEditSubmission = () => {
@@ -20,11 +20,9 @@ function CartItem(props) {
   const handleNumberChange = (event) => {
     const value = event.target.value.replace(/\D/g, "");
     setQuantityValue(value !== "" ? parseInt(value) : '0');
-
   };
 
   const handleQDecrement = (event) => {
-    console.log(event)
     const value = (quantityValue > 0 ? parseInt(quantityValue) - 1 : 0);
     setQuantityValue(value.toString());
   };
