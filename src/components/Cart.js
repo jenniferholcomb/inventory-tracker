@@ -21,6 +21,11 @@ function Cart(props) {
             <h3 className={`${"categoryHeader"} ${"quantity"}`}>Quantity</h3>
             <h3 className={`${"categoryHeader"} ${"total"}`}>Total</h3>
           </div>
+          {
+            cartList.length === 0 ?
+              <p className="emptyCart">Your cart is currently empty.</p>
+            : null
+          }
           <div className="cartItemGroup">
             {cartList.map((item, index) => 
               <CartItem item={item} 
@@ -47,7 +52,7 @@ function Cart(props) {
             <button className="cancelFormButton" id="formCancelButton" type="button" onClick={onClickingCancel}><span className="buttonText">return to store</span></button>
           </div>
           <div className="saveBtnContainer">
-            <button className={`${"saveFormButton"} ${"cartSaveButton"}`} id="formSaveButton" type="submit" onClick={onClickingCheckout}><span className="buttonTextSolid">Checkout</span></button>
+            <button className={`${cartList.length !== 0 ? "saveFormButton cartSaveButton" : "disabledButton"}`} id="formSaveButton" type="submit" onClick={onClickingCheckout}><span className="buttonTextSolid">Checkout</span></button>
           </div>
         </div>
       </div>

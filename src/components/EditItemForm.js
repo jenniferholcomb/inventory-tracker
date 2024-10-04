@@ -7,7 +7,6 @@ function EditItemForm(props) {
   const { item } = props;
 
   function handleEditItemSubmission(event) {
-    console.log(event.currentTarget)
     event.preventDefault();
     props.onEditingItem({
       name: event.currentTarget.form.name.value,

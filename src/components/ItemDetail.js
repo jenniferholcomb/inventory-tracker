@@ -10,12 +10,6 @@ function ItemDetail(props) {
   
   const [quantityValue, setQuantityValue] = useState(1);
 
-  const buttonStyles = {
-    paddingLeft: '2rem',
-    // display: 'flex',
-    justifyContent: 'space-between'
-  };
-
   const handleBuyingItem = (event) => {
     event.preventDefault();
     onNewCartItem({
@@ -103,7 +97,6 @@ function ItemDetail(props) {
           <img src={narrowIndex} className="indexNarrow" alt="index card"/>
         </div>
           <div className="editWidgetContainer">
-            <h2 className="editWdgHeader">(admin)</h2>
             <div className="editWidgetActions">
               <h3 className="widgetLinkDetail" id="editLinkA" onClick={onClickingEdit}>+ edit details</h3>
               <h3 className="widgetLinkDetail" id="editLinkB" onClick={onClickingDelete}>- delete bean</h3>

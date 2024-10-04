@@ -8,7 +8,7 @@ function ReusableForm(props) {
 
   const [nameText, setNameText] = useState(props.name ? props.name.length : 0);
   const [descText, setDescText] = useState(props.name ? props.description.length : 0);
-  const [roastValue, setRoastValue] = useState('');
+  const [roastValue, setRoastValue] = useState(props.name ? props.roast : '');
   const [originValue, setOriginValue] = useState(props.name ? props.origin : '');
   const [originImg, setOriginImg] = useState(props.name ? props.plantImg : empty);
   const [priceValue, setPriceValue] = useState(props.name ? props.price : 1);
@@ -30,7 +30,6 @@ function ReusableForm(props) {
     } else {
       setSaveValue(false);
     }
-    console.log(newSaveArr)
   }
 
   const handleChange = (event) => {
@@ -77,7 +76,7 @@ function ReusableForm(props) {
   useEffect(() => {
     checkSaveArray();
   }, [nameText, descText, roastValue, originValue, priceValue]);
-
+  
   return (
     <React.Fragment>
       <div className="formCard">
@@ -127,7 +126,7 @@ function ReusableForm(props) {
                   onChange={handleChange} 
                   className={`${styles.nameInput} ${styles.roastInput} ${roastValue === '' ? styles.placeholderOrigin : null}`}>
                   { 
-                    !props.name ? <option value="" id={styles.place}>select</option> : null
+                    !props.name ? <option value="">select</option> : null
                   }
                   <option value="light">light</option>
                   <option value="medium">medium</option>

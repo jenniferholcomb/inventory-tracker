@@ -6,14 +6,15 @@ import { v4 } from 'uuid';
 function NewItemForm(props) {
 
   function handleNewItemFormSubmission(event) {
+
     event.preventDefault();
     props.onNewItemCreation({
-      name: event.target.name.value,
-      origin: event.target.origin.value,
-      roast: event.target.roast.value,
-      description: event.target.description.value,
-      price: event.target.price.value,
-      quantity: 130,
+      name: event.currentTarget.form.name.value,
+      origin: event.currentTarget.form.origin.value,
+      roast: event.currentTarget.form.roast.value,
+      description: event.currentTarget.form.description.value,
+      price: event.currentTarget.form.price.value,
+      quantity: event.currentTarget.form.quantity.value,
       notification: '',
       id: v4()
     })

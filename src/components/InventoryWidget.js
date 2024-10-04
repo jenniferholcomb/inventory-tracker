@@ -17,7 +17,7 @@ function InventoryWidget(props) {
           )}
           </div>
           <div className="widgetActions">
-            <h3 className="widgetLink" onClick={props.onAddBeanClick}>+ add new bean</h3>
+            <h3 className={`${props.itemsList.length < 8 ? "widgetLink" : "disabledWidgetLink"}`} onClick={props.onAddBeanClick}>+ add new bean</h3>
           </div>
         </div>
       

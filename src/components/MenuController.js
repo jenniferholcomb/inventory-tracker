@@ -28,6 +28,8 @@ class MenuController extends React.Component {
       newItemFormVisible: false,
       editItemFormVisible: false,
       deleteWarningVisible: false,
+      newItemAddedSuccessful: false,
+      purchaseSuccessful: false,
       cartVisible: false,
       checkoutCompleteVisible: false,
       selectedItem: null,
@@ -73,9 +75,11 @@ class MenuController extends React.Component {
   }
 
   handleAddingNewItem = (newItem) => {
+    console.log(newItem)
     const newItemsList = this.state.itemsList.concat(newItem);
     this.setState({
       itemsList: newItemsList,
+      newItemAddedSuccessful: true,
       newItemFormVisible: false
     });
   }
@@ -100,9 +104,11 @@ class MenuController extends React.Component {
     });
   }
 
-  handleCancelingDelete = () => {
+  handleCancelingMessage = () => {
     this.setState({
-      deleteWarningVisible: false
+      deleteWarningVisible: false,
+      newItemAddedSuccessful: false,
+      checkoutCompleteVisible: false
     })
   }
 
@@ -167,8 +173,8 @@ class MenuController extends React.Component {
     this.setState({
       // checkoutCompleteVisible: true,
       cartItems: [],
-      itemsList: updatedList
-
+      itemsList: updatedList,
+      checkoutCompleteVisible: true
     });
 
     // purchasedItem.notification = (purchasedItem.quantity === 0) ? "OUT OF STOCK" :
@@ -242,14 +248,18 @@ class MenuController extends React.Component {
                 </div>
               </React.Fragment>
             :
-            this.state.deleteWarningVisible ?
+            this.state.newItemAddedSuccessful || this.state.deleteWarningVisible || this.state.checkoutCompleteVisible ?
               <React.Fragment>
                 <div className="container-details">
                   <div className="deleteWarning">
-                    <p className="deleteWarningText">Are you sure you want to delete {this.state.selectedItem.name}? </p>
+                    <p className="deleteWarningText">{ this.state.deleteWarningVisible ? `Are you sure you want to delete ${this.state.selectedItem.name}?` : this.state.newItemAddedSuccessful ? `You've successfully added ${this.state.itemsList[this.state.itemsList.length - 1].name}.` : 'Purchase successfull. Thanks for shopping.' }</p>
                     <div className="deleteWdgButtons">
-                      <button type="submit" className="cancelButton" onClick={this.handleCancelingDelete}><span className="buttonText">Cancel</span></button>
-                      <button type="submit" className="deleteButton" onClick={() => this.handleDeletingItem(this.state.selectedItem.id)}><span className="buttonTextSolid">Delete Bean</span></button>
+                      <button type="submit" className="cancelButton" id="doneButton" onClick={this.handleCancelingMessage}><span className="buttonText">{this.state.deleteWarningVisible ? `Cancel` : `Done`}</span></button>
+                      {
+                        this.state.deleteWarningVisible ?
+                          <button type="submit" className="deleteButton" onClick={() => this.handleDeletingItem(this.state.selectedItem.id)}><span className="buttonTextSolid">Delete Bean</span></button>
+                        : null
+                      }
                     </div>
                   </div>
                 </div>
@@ -278,7 +288,7 @@ class MenuController extends React.Component {
                   </div>
                   <ItemDetail item={ this.state.selectedItem }
                               countryList={ this.state.countryList }
-                              onClickingDelete={ this.handleDeletingItem }
+                              onClickingDelete={ this.handleDeletingWarning }
                               onClickingEdit={ this.handleEditClick } 
                               onNewCartItem={ this.handleAddToCartClick } 
                               onQuantityCreation={ this.handleAddToCartClick } />
@@ -325,8 +335,8 @@ class MenuController extends React.Component {
             {
               this.state.menuBarVisible ?
                 <React.Fragment>
-                  <div className="closeIcon"> 
-                    <img src={closeIcon} onClick={ this.handleMenuClick } alt="close icon"/>
+                  <div className="menuCloseIcon"> 
+                    <img src={closeIcon} onClick={ this.handleMenuClick } alt="close icon" />
                   </div>
                     <ul className="menuContent">
                       <li className="menuList" onClick={this.handleCartClick}>cart</li>
