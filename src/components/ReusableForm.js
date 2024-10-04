@@ -13,13 +13,28 @@ function ReusableForm(props) {
   const [originImg, setOriginImg] = useState(props.name ? props.plantImg : empty);
   const [priceValue, setPriceValue] = useState(props.name ? props.price : 1);
   const [quanValue, setQuanValue] = useState(props.name ? props.quantity : 1);
-  const [saveValue, setSaveValue] = useState([]);
+  const [saveValue, setSaveValue] = useState(false);
   const nameMaxLength = 40;
   const descMaxLength = 259;
 
+  const checkSaveArray = () => {
+    let newSaveArr = 0;
+    if (nameText !== 0) { newSaveArr++; }
+    if (descText !== 0) { newSaveArr++; }
+    if (roastValue !== '') { newSaveArr++; }
+    if (originImg !== empty) { newSaveArr++; }
+    if (priceValue > 0) { newSaveArr++; }
+
+    if (newSaveArr === 5) {
+      setSaveValue(true);
+    } else {
+      setSaveValue(false);
+    }
+    console.log(newSaveArr)
+  }
+
   const handleChange = (event) => {
     const { name, value } = event.target;
-    console.log(name, value)
     if (name === "name") {
       setNameText(value.length);
     } else if (name === "description") {
@@ -30,7 +45,6 @@ function ReusableForm(props) {
       setOriginValue(value);
       setOriginImg(value === '' ? empty : props.originImg[props.originImg.findIndex(country => country.origin === value)].cpImg); 
     }
-    checkSaveArray(name);
   };
 
   const handleNumberChange = (event) => {
@@ -38,7 +52,6 @@ function ReusableForm(props) {
     event.target.name === "price" ? 
       setPriceValue(valueNum !== "" ? parseInt(valueNum) : '0')
       : setQuanValue(valueNum !== "" ? parseInt(valueNum) : '0')
-      checkSaveArray(event.target.name);
   };
 
   const handleDecrement = () => {
@@ -49,7 +62,6 @@ function ReusableForm(props) {
   const handleIncrement = () => {
     const value = (priceValue < 999 ? parseInt(priceValue) + 1 : 999);
     setPriceValue(value.toString());
-    checkSaveArray("price");
   };
 
   const handleQDecrement = () => {
@@ -60,17 +72,11 @@ function ReusableForm(props) {
   const handleQIncrement = () => {
     const value = (quanValue < 999 ? parseInt(quanValue) + 1 : 999);
     setQuanValue(value.toString());
-    checkSaveArray("quantity");
   };
 
-  const checkSaveArray = (name) => {
-    const save = saveValue.filter( e => e === name );
-    if (save.length === 0) {
-      const newSave = [ ...saveValue, name ];
-      setSaveValue(newSave);
-      console.log(newSave)
-    }
-  }
+  useEffect(() => {
+    checkSaveArray();
+  }, [nameText, descText, roastValue, originValue, priceValue]);
 
   return (
     <React.Fragment>
@@ -182,7 +188,7 @@ function ReusableForm(props) {
             </div>
             
             <div className="btn2">
-              <button className={`${saveValue.length === 6 ? "saveFormButton" : "disabled"}`} id="formSaveButton" type="submit" onClick={props.formSubmissionHandler}><span className="buttonTextSolid">{props.buttonText}</span></button>
+              <button className={`${saveValue ? "saveFormButton" : "disabledButton"}`} id="formSaveButton" type="submit" onClick={props.formSubmissionHandler}><span className="buttonTextSolid">{props.buttonText}</span></button>
             </div>
             <div className="btn1">
               <button className="cancelFormButton" id="formCancelButton" type="button" onClick={props.onClickingCancel}><span className="buttonText">Cancel</span></button>

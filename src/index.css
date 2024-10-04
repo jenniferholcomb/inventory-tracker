@@ -16,12 +16,20 @@ code {
     monospace;
 }
 
-.disabled {
+.disabled, .disabledButton {
   display: block !important; /* since you set the element's display to none inline,
                                 we need to use !important flag (which is pretty bad)
                                 to override the inline style */
   pointer-events: none; /* Disable an element interaction, so it will not respond any event */
   color: #ccc; /* Gray out the text color to signify being disabled */
+}
+
+.disabledButton {
+  background-color: #b0aeae; /* Gray out the text color to signify being disabled */
+  width: 142px;
+  height: 27px;
+  border-radius: 20px;
+  border: none;
 }
 
 .appContainer {
@@ -1161,7 +1169,7 @@ button .cartButton {
 
 .formCard {
   width: 596px;
-  height: 100%;
+  max-height: 100%;
   flex-shrink: 0;
   border-radius: 5px;
   background: #F3EDE7;
