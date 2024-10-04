@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import PropTypes from 'prop-types';
 import CartItem from "./CartItem";
 
 function Cart(props) {
 
-  const { cartList, onEditingCartItem, onRemovingCartItem, cartTotal, onClickingCheckout } = props;
+  const { cartList, onEditingCartItem, onRemovingCartItem, cartTotal, onClickingCancel, onClickingCheckout } = props;
 
   return (
     <React.Fragment>
@@ -24,6 +24,7 @@ function Cart(props) {
           <div className="cartItemGroup">
             {cartList.map((item, index) => 
               <CartItem item={item} 
+                        key={item.id}
                         onEditingQuantity={onEditingCartItem}
                         onRemovingItem={onRemovingCartItem} />
             )}
@@ -43,10 +44,10 @@ function Cart(props) {
         </div>
         <div className="cartButtons">
           <div className="updateBtnContainer">
-            <button className="cancelFormButton" id="formCancelButton" type="button" onClick=''><span className="buttonText">return to store</span></button>
+            <button className="cancelFormButton" id="formCancelButton" type="button" onClick={onClickingCancel}><span className="buttonText">return to store</span></button>
           </div>
           <div className="saveBtnContainer">
-            <button className={`${"saveFormButton"} ${"cartSaveButton"}`} id="formSaveButton" type="submit" onClick=''><span className="buttonTextSolid">Checkout</span></button>
+            <button className={`${"saveFormButton"} ${"cartSaveButton"}`} id="formSaveButton" type="submit" onClick={onClickingCheckout}><span className="buttonTextSolid">Checkout</span></button>
           </div>
         </div>
       </div>
@@ -57,6 +58,7 @@ function Cart(props) {
 Cart.propTypes = {
   cartList: PropTypes.array,
   cartTotal: PropTypes.number,
+  onClickingCancel: PropTypes.func,
   onClickingCheckout: PropTypes.func
 };
 

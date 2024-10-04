@@ -18,7 +18,6 @@ import indiaFlag from "./../img/indiaFlag.png";
 import philImg from "./../img/pcp.png";
 import philFlag from "./../img/philFlag.png";
 import closeIcon from "./../img/closeIcon.png";
-import narrowIndex from "./../img/indexCardNarrow.webp";
 
 class MenuController extends React.Component {
 
@@ -30,6 +29,7 @@ class MenuController extends React.Component {
       editItemFormVisible: false,
       deleteWarningVisible: false,
       cartVisible: false,
+      checkoutCompleteVisible: false,
       selectedItem: null,
       cartItems: [],
       cartSubtotal: 0,
@@ -44,32 +44,32 @@ class MenuController extends React.Component {
 
   handleMenuClick = () => {
     this.setState(prevState => ({
-      menuBarVisible: !prevState.menuBarVisible
+      menuBarVisible: !prevState.menuBarVisible,
     }));
   }
 
   handleCartClick = () => {
     this.setState(prevState => ({
-      cartVisible: !prevState.cartVisible
+      cartVisible: !prevState.cartVisible,
     }));
-  }
-
-  handleExitMenu = () => {
-    this.setState({
-      menuBarVisible: false
-    })
   }
 
   handleClick = () => {
+
     this.setState(prevState => ({ 
-      newItemFormVisible: !prevState.newItemFormVisible 
+      newItemFormVisible: !prevState.newItemFormVisible
     }));
   }
 
+  handleAddBeanClick = () => {
+    this.handleClick();
+    this.handleMenuClick();
+  }
+
   handleEditClick = () => {
-    this.setState({
-      editItemFormVisible: true
-    });
+    this.setState(prevState => ({
+      editItemFormVisible: !prevState.editItemFormVisible
+    }));
   }
 
   handleAddingNewItem = (newItem) => {
@@ -112,11 +112,13 @@ class MenuController extends React.Component {
     });
   }
 
-  handleDeletingItem = (itemId) => {
-    const newItemsList = this.state.itemsList.filter(item => item.id !== itemId);
+  handleDeletingItem = () => {
+    const newItemsList = this.state.itemsList.filter(item => item.id !== this.state.selectedItem.id);
+    const newCartList = this.state.cartItems.filter(item => item.name !== this.state.selectedItem.name);
     this.setState({
       itemsList: newItemsList,
       selectedItem: null,
+      cartItems: newCartList,
       deleteWarningVisible: false
     });
   }
@@ -138,9 +140,9 @@ class MenuController extends React.Component {
     const itemIndex = this.state.cartItems.findIndex(obj => obj.id === editedCartItem.id);
     const newCartItem = { ...this.state.cartItems[itemIndex], ...editedCartItem };
     const updatedCartList = [
-      ...this.state.cartItems.slice(0, itemIndex), // Elements before the item
-      newCartItem,                                // The updated item
-      ...this.state.cartItems.slice(itemIndex + 1) // Elements after the item
+      ...this.state.cartItems.slice(0, itemIndex), 
+      newCartItem,                                
+      ...this.state.cartItems.slice(itemIndex + 1) 
     ];
 
     this.setState({
@@ -149,7 +151,6 @@ class MenuController extends React.Component {
   }
 
   handleCartItemDelete = (deletedId) => {
-    console.log(deletedId)
     const newCartItemList = this.state.cartItems.filter(e => e.id !== deletedId);
     this.setState({
       cartItems: newCartItemList
@@ -157,23 +158,24 @@ class MenuController extends React.Component {
   }
 
   handleCheckingOut = () => {
-    // const purchasedItem = this.state.itemsList.filter(item => item.id === this.state.selectedItem.id)[0];
-    // purchasedItem.quantity -= quantityPurchased;
-    // const newItemsList = [...this.state.itemsList];
-    // const index = this.state.itemsList.indexOf(this.state.selectedItem);
-    // newItemsList.splice(index, 1, purchasedItem);
+    const updatedList = this.state.itemsList.map(item => {
+      const cartItem = this.state.cartItems.find(cartItem => cartItem.name === item.name);
+      return cartItem ? { ...item, quantity: item.quantity - cartItem.quantityPurchase} : item;
+    })
+
+    this.handleCartClick();
+    this.setState({
+      // checkoutCompleteVisible: true,
+      cartItems: [],
+      itemsList: updatedList
+
+    });
 
     // purchasedItem.notification = (purchasedItem.quantity === 0) ? "OUT OF STOCK" :
     // (purchasedItem.quantity <= 10) ? "ALMOST SOLD OUT!" : "" ;
-
-    // this.setState({
-    //   itemsList: newItemsList,
-    //   selectedItem: null
-    // });
   }
 
-  handleBuyingClick = (newCartItem) => {
-
+  handleAddToCartClick = (newCartItem) => {
     const duplicate = this.state.cartItems.filter(e => e.name === newCartItem.name);
     if (duplicate.length === 0) {
       const newCartItemsList = [...this.state.cartItems, newCartItem];
@@ -185,25 +187,15 @@ class MenuController extends React.Component {
       const itemIndex = this.state.cartItems.findIndex(obj => obj.name === newCartItem.name);
       const updatedCartItem = { ...this.state.cartItems[itemIndex], ...{ quantityPurchase: (this.state.cartItems[itemIndex].quantityPurchase + newCartItem.quantityPurchase)} };
       const updatedCartItemsList = [
-        ...this.state.cartItems.slice(0, itemIndex), // Elements before the item
-        updatedCartItem,                                // The updated item
-        ...this.state.cartItems.slice(itemIndex + 1) // Elements after the item
+        ...this.state.cartItems.slice(0, itemIndex), 
+        updatedCartItem,                            
+        ...this.state.cartItems.slice(itemIndex + 1) 
       ];
       this.setState({
         cartItems: updatedCartItemsList,
         selectedItem: null
       });
     }
-
-    // const itemIndex = this.state.cartItems.findIndex(obj => obj.id === newCartItem.id);
-    // const updatedQuantity = this.state.cartItems[itemIndex].quantityPurchase + newCartItem.quantityPurchase;
-
-    // const newCartItemsList = [...this.state.cartItems, newCartItem];
-    // this.setState({
-    //   cartItems: newCartItemsList,
-    //   selectedItem: null
-    // });
-    // console.log(newCartItemsList)
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -211,7 +203,6 @@ class MenuController extends React.Component {
       const total = this.state.cartItems.reduce((accumulator, item) => {
         return accumulator + item.quantityPurchase * parseInt(item.price);
       }, 0);
-      console.log('total',total)
       this.setState({
         cartSubtotal: total
       });
@@ -239,13 +230,14 @@ class MenuController extends React.Component {
             this.state.cartVisible ?
               <React.Fragment>
                 <div className="container-details">
-                  <div className="detBtn"> 
-                    <img src={closeIcon} onClick={ this.handleCartClick } />
+                  <div className="closeIcon"> 
+                    <img src={closeIcon} onClick={ this.handleCartClick } alt="close icon"/>
                   </div>
                   <Cart cartList={this.state.cartItems}
                         onEditingCartItem={this.handleCartQuantityUpdate}
                         onRemovingCartItem={this.handleCartItemDelete}
                         cartTotal={this.state.cartSubtotal}
+                        onClickingCancel={this.handleCartClick}
                         onClickingCheckout={this.handleCheckingOut}/>
                 </div>
               </React.Fragment>
@@ -265,6 +257,9 @@ class MenuController extends React.Component {
             :
             this.state.editItemFormVisible ?
               <React.Fragment>
+                <div className="closeIcon"> 
+                  <img src={closeIcon} onClick={ this.handleEditClick } alt="close icon"/>
+                </div>
                 <div className="container-details">
                   <EditItemForm item={ this.state.selectedItem }
                                 countryList={ this.state.countryList }
@@ -278,47 +273,39 @@ class MenuController extends React.Component {
               <React.Fragment>
               
                 <div className="container-details">
-                  <div className="detBtn"> 
-                    <img src={closeIcon} onClick={ this.handleReturningToList } />
+                  <div className="closeIcon"> 
+                    <img src={closeIcon} onClick={ this.handleReturningToList } alt="close icon"/>
                   </div>
                   <ItemDetail item={ this.state.selectedItem }
                               countryList={ this.state.countryList }
                               onClickingDelete={ this.handleDeletingItem }
                               onClickingEdit={ this.handleEditClick } 
-                              onNewCartItem={ this.handleBuyingClick } 
-                              onQuantityCreation={ this.handleBuyingClick } />
-                  <div className="indexEditWidget">
-                    <img src={narrowIndex} className="indexNarrow" />
-                    <div className="editWidgetContainer">
-                      <h2 className="editWdgHeader">admin actions</h2>
-                      <div className="editWidgetActions">
-                        <h3 className="widgetLink" id="editLinkA" onClick={this.handleEditClick}>+ edit details</h3>
-                        <h3 className="widgetLink" id="editLinkB" onClick={this.handleDeletingWarning}><a>- delete bean</a></h3>
-                      </div>
-                    </div>
-                  </div>
+                              onNewCartItem={ this.handleAddToCartClick } 
+                              onQuantityCreation={ this.handleAddToCartClick } />
                 </div>
               </React.Fragment>
             :
             this.state.newItemFormVisible ?
               <React.Fragment>
-                <div className="form">
-                <div className="returnButton">
-                    <button onClick={ this.handleClick }>Return to Bean List</button>
-                  </div>
-                  <NewItemForm onNewItemCreation={ this.handleAddingNewItem } />
+                <div className="closeIcon"> 
+                  <img src={closeIcon} onClick={ this.handleClick } alt="close icon"/>
+                </div>
+                <div className="container-details">
+                  <NewItemForm onNewItemCreation={ this.handleAddingNewItem } 
+                               onClickingCancel={this.handleClick}
+                               countryList={ this.state.countryList } />
                 </div>
               </React.Fragment>
             : null
           }
           <div className="rightPage">
             <div className="cartContainer" >
-              <h3 className="cart">cart</h3>
+              <h3 className="cart" onClick={this.handleCartClick}>cart</h3>
               <div className="cartCountContainer" onClick={this.handleCartClick}>
                 <svg className="cartCircle" xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 19 19" fill="none">
                   <circle cx="9.5" cy="9.5" r="9.5" fill="#343434"/>
                 </svg>
-                <h3 className="cartCount">0</h3>
+                <h3 className="cartCount">{this.state.cartItems.length}</h3>
             </div>
             </div>
           </div>
@@ -334,31 +321,37 @@ class MenuController extends React.Component {
             :
               null
           }
-          <div onClick={this.handleMenuClick} className="menuIconContainer">
+          <div  className="menuIconContainer">
             {
               this.state.menuBarVisible ?
                 <React.Fragment>
                   <div className="closeIcon"> 
-                    <img src={closeIcon} onClick={ this.handleReturningToList } />
+                    <img src={closeIcon} onClick={ this.handleMenuClick } alt="close icon"/>
                   </div>
-
                     <ul className="menuContent">
-                      <li className="menuList">cart</li>
-                      <li className="menuList">products</li>
-                      <li className="menuList">shop</li>
-                      <li className="menuList">about us</li>
-                      <li className="menuList">contact</li>
+                      <li className="menuList" onClick={this.handleCartClick}>cart</li>
+                      <li className="menuList" >products</li>
+                      <li className="listContainer"><h3 className="menuList" title="I'm static - checkout 'cart' or '+add new bean' below">shop</h3></li>
+                      <li className="menuList" title="I'm static - checkout 'cart' or '+add new bean' below">about us</li>
+                      <li className="menuList" title="I'm static - checkout 'cart' or '+add new bean' below">contact</li>
                     </ul>
                  
                   <div className="inventory-widget"> </div>
                   <InventoryWidget itemsList={ this.state.itemsList } 
-                                   onAddBeanClick={ this.handleClick } />
+                                   onAddBeanClick={ this.handleAddBeanClick } />
                 </React.Fragment>
                 
-              :
-                <svg className="menuIcon" xmlns="http://www.w3.org/2000/svg" width="20" height="13" viewBox="0 0 20 13" fill="none">
-                  <path d="M0 13V10.8333H20V13H0ZM0 7.58333V5.41667H20V7.58333H0ZM0 2.16667V0H20V2.16667H0Z" fill="#343434"/>
-                </svg>
+              : 
+                <div className="menuIcon">
+                  {
+                    this.state.newItemFormVisible || this.state.editItemFormVisible || this.state.deleteWarningVisible || this.state.cartVisible || this.state.checkoutCompleteVisible || this.state.selectedItem !== null ?
+                      <div className="disabled"></div>
+                    :
+                      <svg onClick={this.handleMenuClick} xmlns="http://www.w3.org/2000/svg" width="20" height="13" viewBox="0 0 20 13" fill="none">
+                        <path d="M0 13V10.8333H20V13H0ZM0 7.58333V5.41667H20V7.58333H0ZM0 2.16667V0H20V2.16667H0Z" fill="#343434"/>
+                      </svg>
+                  }
+                </div>  
             }
           </div>
         </div>

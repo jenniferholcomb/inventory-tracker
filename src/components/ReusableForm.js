@@ -1,17 +1,19 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from 'prop-types';
 
 import styles from './ReusableForm.module.css';
+import empty from './../img/emptyImg.png';
 
 function ReusableForm(props) {
 
-  const [nameText, setNameText] = useState(props.name.length);
-  const [descText, setDescText] = useState(props.description.length);
+  const [nameText, setNameText] = useState(props.name ? props.name.length : 0);
+  const [descText, setDescText] = useState(props.name ? props.description.length : 0);
   const [roastValue, setRoastValue] = useState('');
-  const [originValue, setOriginValue] = useState(props.origin);
-  const [originImg, setOriginImg] = useState(props.plantImg);
-  const [priceValue, setPriceValue] = useState(props.price);
-  const [quanValue, setQuanValue] = useState(props.quantity);
+  const [originValue, setOriginValue] = useState(props.name ? props.origin : '');
+  const [originImg, setOriginImg] = useState(props.name ? props.plantImg : empty);
+  const [priceValue, setPriceValue] = useState(props.name ? props.price : 1);
+  const [quanValue, setQuanValue] = useState(props.name ? props.quantity : 1);
+  const [saveValue, setSaveValue] = useState([]);
   const nameMaxLength = 40;
   const descMaxLength = 259;
 
@@ -26,15 +28,17 @@ function ReusableForm(props) {
       setRoastValue(value);
     } else if (name === "origin") {
       setOriginValue(value);
-      setOriginImg(props.originImg[props.originImg.findIndex(country => country.origin === value)].cpImg); 
+      setOriginImg(value === '' ? empty : props.originImg[props.originImg.findIndex(country => country.origin === value)].cpImg); 
     }
+    checkSaveArray(name);
   };
 
   const handleNumberChange = (event) => {
-    const value = event.target.value.replace(/\D/g, "");
+    const valueNum = event.target.value.replace(/\D/g, "");
     event.target.name === "price" ? 
-      setPriceValue(value !== "" ? parseInt(value) : '0')
-      : setQuanValue(value !== "" ? parseInt(value) : '0')
+      setPriceValue(valueNum !== "" ? parseInt(valueNum) : '0')
+      : setQuanValue(valueNum !== "" ? parseInt(valueNum) : '0')
+      checkSaveArray(event.target.name);
   };
 
   const handleDecrement = () => {
@@ -45,6 +49,7 @@ function ReusableForm(props) {
   const handleIncrement = () => {
     const value = (priceValue < 999 ? parseInt(priceValue) + 1 : 999);
     setPriceValue(value.toString());
+    checkSaveArray("price");
   };
 
   const handleQDecrement = () => {
@@ -55,7 +60,17 @@ function ReusableForm(props) {
   const handleQIncrement = () => {
     const value = (quanValue < 999 ? parseInt(quanValue) + 1 : 999);
     setQuanValue(value.toString());
+    checkSaveArray("quantity");
   };
+
+  const checkSaveArray = (name) => {
+    const save = saveValue.filter( e => e === name );
+    if (save.length === 0) {
+      const newSave = [ ...saveValue, name ];
+      setSaveValue(newSave);
+      console.log(newSave)
+    }
+  }
 
   return (
     <React.Fragment>
@@ -76,7 +91,7 @@ function ReusableForm(props) {
                   className='nameInput'
                   name='name'
                   // placeholder={props.name ? props.name : 'Name'} required
-                  defaultValue={props.name ? props.name : 'Name'}
+                  defaultValue={props.name ? props.name : ''}
                   onChange={handleChange}
                   maxLength={nameMaxLength}
                 />
@@ -88,7 +103,10 @@ function ReusableForm(props) {
                   name='origin' 
                   value={originValue} 
                   onChange={handleChange} 
-                  className={`${styles.nameInput} ${styles.originInput} ${originValue === 'Brazil' ? styles.nameInputBrazil : originValue === 'Colombia' ? styles.nameInputColombia : originValue === 'India' ? styles.nameInputIndia : styles.nameInputPhillipines}`}>
+                  className={`${styles.nameInput} ${styles.originInput} ${originValue === 'Brazil' ? styles.nameInputBrazil : originValue === 'Colombia' ? styles.nameInputColombia : originValue === 'India' ? styles.nameInputIndia : originValue === 'Phillipines' ? styles.nameInputPhillipines : styles.placeholderOrigin}`}>
+                  { 
+                    !props.name ? <option value="">select</option> : null
+                  }
                   <option value="Brazil">Brazil</option>
                   <option value="Colombia">Colombia</option>
                   <option value="India">India</option>
@@ -99,10 +117,12 @@ function ReusableForm(props) {
                 <label htmlFor="roast">ROAST: </label>
                 <select 
                   name='roast' 
-                  defaultValue={props.name ? props.roast : 'Roast'} 
                   value={roastValue} 
                   onChange={handleChange} 
-                  className={`${styles.nameInput} ${styles.roastInput}`}>
+                  className={`${styles.nameInput} ${styles.roastInput} ${roastValue === '' ? styles.placeholderOrigin : null}`}>
+                  { 
+                    !props.name ? <option value="" id={styles.place}>select</option> : null
+                  }
                   <option value="light">light</option>
                   <option value="medium">medium</option>
                   <option value="dark">dark</option>
@@ -115,8 +135,7 @@ function ReusableForm(props) {
                 <textarea 
                   name='description'
                   className='descriptForm'
-                  placeholder={props.name ? props.description : 'Description'} required
-                  defaultValue={props.name ? props.description : 'Description'}
+                  defaultValue={props.name ? props.description : ''}
                   onChange={handleChange}
                   maxLength={descMaxLength}
                 />
@@ -163,7 +182,7 @@ function ReusableForm(props) {
             </div>
             
             <div className="btn2">
-              <button className="saveFormButton" id="formSaveButton" type="submit" onClick={props.formSubmissionHandler}><span className="buttonTextSolid">{props.buttonText}</span></button>
+              <button className={`${saveValue.length === 6 ? "saveFormButton" : "disabled"}`} id="formSaveButton" type="submit" onClick={props.formSubmissionHandler}><span className="buttonTextSolid">{props.buttonText}</span></button>
             </div>
             <div className="btn1">
               <button className="cancelFormButton" id="formCancelButton" type="button" onClick={props.onClickingCancel}><span className="buttonText">Cancel</span></button>

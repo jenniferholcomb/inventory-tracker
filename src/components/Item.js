@@ -24,7 +24,7 @@ function Item(props) {
             <h3 className="cardSubHead">ROAST:&nbsp;&nbsp;<span className="subHeadTextB">{props.roast}</span></h3>
             <h3 className="cardSubHead" id="desSubHead">DESCRIPTION:</h3>
           </div>
-          <div className="flagContainer" id="detailFlagHide">          
+          <div className="flagContainer" id={props.detailPg ? "detailFlag" : "cardFlag"}>          
             <img className="flag" src={props.flag} alt="Colombia flag" />
           </div>
           {/* <p>{quantityNotification}</p> */}

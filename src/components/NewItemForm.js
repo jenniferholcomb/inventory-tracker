@@ -23,8 +23,9 @@ function NewItemForm(props) {
     <React.Fragment>
       <div className="formCard">
       <ReusableForm formSubmissionHandler={ handleNewItemFormSubmission } 
-                    // onClickingCancel={onClickingCancel}
-                    buttonText="Save" 
+                    onClickingCancel={props.onClickingCancel}
+                    originImg={props.countryList}
+                    buttonText="Save new Bean" 
                     headerText="Add new bean" />
       </div>
     </React.Fragment>
