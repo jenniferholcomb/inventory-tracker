@@ -219,8 +219,8 @@ class MenuController extends React.Component {
     return (
       <React.Fragment>
         <div className="appContainer">
-          <div className="leftPage">
-          </div>
+          <div className="topNav"></div>
+          <div className="leftPage"></div>
           <div className="centerPage"> 
             <Header /> 
           </div>
@@ -309,15 +309,15 @@ class MenuController extends React.Component {
             : null
           }
           <div className="rightPage">
-            <div className="cartContainer" >
+            {/* <div className="cartContainer" >
               <h3 className="cart" onClick={this.handleCartClick}>cart</h3>
               <div className="cartCountContainer" onClick={this.handleCartClick}>
                 <svg className="cartCircle" xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 19 19" fill="none">
                   <circle cx="9.5" cy="9.5" r="9.5" fill="#343434"/>
                 </svg>
                 <h3 className="cartCount">{this.state.cartItems.length}</h3>
-            </div>
-            </div>
+              </div>
+            </div> */}
           </div>
           <div className="footer">
             <h4 className="footerText">Crafted with care, from earth to cup</h4>
@@ -358,11 +358,20 @@ class MenuController extends React.Component {
                       <div className="disabled"></div>
                     :
                       <svg onClick={this.handleMenuClick} xmlns="http://www.w3.org/2000/svg" width="20" height="13" viewBox="0 0 20 13" fill="none">
-                        <path d="M0 13V10.8333H20V13H0ZM0 7.58333V5.41667H20V7.58333H0ZM0 2.16667V0H20V2.16667H0Z" fill="#343434"/>
+                        <path d="M0 13V10.8333H20V13H0ZM0 7.58333V5.41667H20V7.58333H0ZM0 2.16667V0H20V2.16667H0Z" />
                       </svg>
                   }
                 </div>  
             }
+          </div>
+          <div className="cartContainer" >
+            <h3 className="cart" onClick={this.handleCartClick}>cart</h3>
+            <div className="cartCountContainer" onClick={this.handleCartClick}>
+              <svg className="cartCircle" xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 19 19" fill="none">
+                <circle cx="9.5" cy="9.5" r="9.5" />
+              </svg>
+              <h3 className="cartCount">{this.state.cartItems.length}</h3>
+            </div>
           </div>
         </div>
       </React.Fragment>
