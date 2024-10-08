@@ -18,9 +18,10 @@ function Item(props) {
           <img className={props.detailPg ? "" : "cardImg"} src={props.plantImg} alt="coffee plantation in Colombia" />
         </div>
         {/* <div className="content" id={props.detailPg ? "detailContent" : null}> */}
-        
-        <h1 className={props.detailPg ? "detailHeader cardHeader": "listCard cardHeader"} lang="en">{props.name}</h1>
-        <div className="listHeaderContainer"></div>
+        <div className={props.detailPg ? "headerContainer" : ""}>          
+          <h1 className={props.detailPg ? "detailHeader cardHeader": "listCard cardHeader"} lang="en">{props.name}</h1>
+        </div>
+        <div className={props.detailPg ? "" : "listHeaderContainer"}></div>
         <h3 className={props.detailPg ? "detailSubHeadOr cardSubHead": "listSubHeadOr cardSubHead"} id={props.detailPg ? '' : "subHeadMarginNrw"}>ORIGIN:&nbsp;&nbsp;<span className="subHeadText">{props.origin}</span></h3>
         <h3 className={props.detailPg ? "detailSubHeadRo cardSubHead": "listSubHeadRo cardSubHead"} id={props.detailPg ? '' : "subHeadMarginNrw"}>ROAST:&nbsp;&nbsp;<span className="subHeadTextB">{props.roast}</span></h3>
         <h3 className={props.detailPg ? "detailSubHeadDes cardSubHead": "listSubHeadDes cardSubHead"} id="desSubHead">DESCRIPTION:</h3>

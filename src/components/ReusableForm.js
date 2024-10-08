@@ -79,121 +79,115 @@ function ReusableForm(props) {
   
   return (
     <React.Fragment>
-      <div className="formCard">
-        <h2  className={`${"cardHeader"} ${"formHeader"}`}>{props.headerText}</h2>
-        <div className="breakLine1">
-          <svg xmlns="http://www.w3.org/2000/svg" width="525" height="2" viewBox="0 0 525 2" fill="none">
-            <path d="M525 1L9.53674e-07 1" stroke="#857E75"/>
-          </svg>
-        </div>
-        <form onSubmit={props.formSubmissionHandler}>
-          <div className="reuseForm">
-            <div className="formCol1Content">
-              <div className="formLine" id="formTopRow">
-                <label htmlFor="name">NAME: </label>
-                <input 
-                  type='text'
-                  className='nameInput'
-                  name='name'
-                  // placeholder={props.name ? props.name : 'Name'} required
-                  defaultValue={props.name ? props.name : ''}
-                  onChange={handleChange}
-                  maxLength={nameMaxLength}
-                />
-              </div>
-              <h5 className="characterCountText">{nameText} / {nameMaxLength} characters</h5>
-              <div className="formLine">
-                <label htmlFor="origin">ORIGIN: </label>
-                <select 
-                  name='origin' 
-                  value={originValue} 
-                  onChange={handleChange} 
-                  className={`${styles.nameInput} ${styles.originInput} ${originValue === 'Brazil' ? styles.nameInputBrazil : originValue === 'Colombia' ? styles.nameInputColombia : originValue === 'India' ? styles.nameInputIndia : originValue === 'Phillipines' ? styles.nameInputPhillipines : styles.placeholderOrigin}`}>
-                  { 
-                    !props.name ? <option value="">select</option> : null
-                  }
-                  <option value="Brazil">Brazil</option>
-                  <option value="Colombia">Colombia</option>
-                  <option value="India">India</option>
-                  <option value="Phillipines">Phillipines</option>
-                </select>
-              </div>
-              <div className="formLine">
-                <label htmlFor="roast">ROAST: </label>
-                <select 
-                  name='roast' 
-                  value={roastValue} 
-                  onChange={handleChange} 
-                  className={`${styles.nameInput} ${styles.roastInput} ${roastValue === '' ? styles.placeholderOrigin : null}`}>
-                  { 
-                    !props.name ? <option value="">select</option> : null
-                  }
-                  <option value="light">light</option>
-                  <option value="medium">medium</option>
-                  <option value="dark">dark</option>
-                </select>
-              </div>
-              <div className="formDescription">
-                <div className="descLab"> 
-                  <label htmlFor="description">DESCRIPTION: </label>
-                </div>
-                <textarea 
-                  name='description'
-                  className='descriptForm'
-                  defaultValue={props.name ? props.description : ''}
-                  onChange={handleChange}
-                  maxLength={descMaxLength}
-                />
-              </div>
-              <h5 className="characterCountText">{descText} / 259 characters</h5>
-            </div>
-            <div className="formPrice">
-              <div className="formLine">
-                <label htmlFor="price">PRICE PER POUND: </label>
-                <button id="decrement" type="button" onClick={handleDecrement}>-</button>
-                <span className="currencyIcon">
+      <div className="formContainer">
+        <div className="formCard">
+          <h2  className={`${"cardHeader"} ${"formHeader"}`}>{props.headerText}</h2>
+          <div className="breakLine1"></div>
+          <form onSubmit={props.formSubmissionHandler}>
+            <div className="reuseForm">
+              <div className="formCol1Content">
+                <div className="formLine" id="formTopRow">
+                  <label htmlFor="name">NAME: </label>
                   <input 
-                    className='priceQuantityInput1'
-                    name='price'
-                    value={priceValue}
+                    type='text'
+                    className='nameInput'
+                    name='name'
+                    // placeholder={props.name ? props.name : 'Name'} required
+                    defaultValue={props.name ? props.name : ''}
+                    onChange={handleChange}
+                    maxLength={nameMaxLength}
+                  />
+                </div>
+                <h5 className="characterCountText">{nameText} / {nameMaxLength} characters</h5>
+                <div className="formLine">
+                  <label htmlFor="origin">ORIGIN: </label>
+                  <select 
+                    name='origin' 
+                    value={originValue} 
+                    onChange={handleChange} 
+                    className={`${styles.nameInput} ${styles.originInput} ${originValue === 'Brazil' ? styles.nameInputBrazil : originValue === 'Colombia' ? styles.nameInputColombia : originValue === 'India' ? styles.nameInputIndia : originValue === 'Phillipines' ? styles.nameInputPhillipines : styles.placeholderOrigin}`}>
+                    { 
+                      !props.name ? <option value="">select</option> : null
+                    }
+                    <option value="Brazil">Brazil</option>
+                    <option value="Colombia">Colombia</option>
+                    <option value="India">India</option>
+                    <option value="Phillipines">Phillipines</option>
+                  </select>
+                </div>
+                <div className="formLine">
+                  <label htmlFor="roast">ROAST: </label>
+                  <select 
+                    name='roast' 
+                    value={roastValue} 
+                    onChange={handleChange} 
+                    className={`${styles.nameInput} ${styles.roastInput} ${roastValue === '' ? styles.placeholderOrigin : null}`}>
+                    { 
+                      !props.name ? <option value="">select</option> : null
+                    }
+                    <option value="light">light</option>
+                    <option value="medium">medium</option>
+                    <option value="dark">dark</option>
+                  </select>
+                </div>
+                <div className="formDescription">
+                  <div className="descLab"> 
+                    <label htmlFor="description">DESCRIPTION: </label>
+                  </div>
+                  <textarea 
+                    name='description'
+                    className='descriptForm'
+                    defaultValue={props.name ? props.description : ''}
+                    onChange={handleChange}
+                    maxLength={descMaxLength}
+                  />
+                </div>
+                <h5 className="characterCountText">{descText} / 259 characters</h5>
+              </div>
+              <div className="formPrice">
+                <div className="formLine">
+                  <label htmlFor="price">PRICE PER POUND: </label>
+                  <button id="decrement" type="button" onClick={handleDecrement}>-</button>
+                  <span className="currencyIcon">
+                    <input 
+                      className='priceQuantityInput1'
+                      name='price'
+                      value={priceValue}
+                      onChange={handleNumberChange}
+                      maxLength='3'
+                    />
+                  </span>
+                  <button id="increment" type="button" onClick={handleIncrement}>+</button>
+                </div>
+              </div>
+              <div className="formCol2Content">
+                <div className="formLine">
+                  <label htmlFor="available" className="available">POUNDS AVAILABLE: </label>
+                  <button id="decrement" type="button" onClick={handleQDecrement}>-</button>
+                  <input 
+                    className='priceQuantityInput2'
+                    name='quantity'
+                    value={quanValue}
                     onChange={handleNumberChange}
                     maxLength='3'
                   />
-                </span>
-                <button id="increment" type="button" onClick={handleIncrement}>+</button>
+                  <button id="increment" type="button" onClick={handleQIncrement}>+</button>
+                </div>
+              </div>
+              <div className="formImage">
+                <img src={originImg} alt="coffee plantation"/>
+              </div>
+              <div className="breakLine3"></div>
+              
+              <div className="btn2">
+                <button className={`${saveValue ? "saveFormButton" : "disabledButton"}`} id="formSaveButton" type="submit" onClick={props.formSubmissionHandler}><span className="buttonTextSolid">{props.buttonText}</span></button>
+              </div>
+              <div className="btn1">
+                <button className="cancelFormButton" id="formCancelButton" type="button" onClick={props.onClickingCancel}><span className="buttonText">Cancel</span></button>
               </div>
             </div>
-            <div className="formCol2Content">
-              <div className="formLine">
-                <label htmlFor="available" className="available">POUNDS AVAILABLE: </label>
-                <button id="decrement" type="button" onClick={handleQDecrement}>-</button>
-                <input 
-                  className='priceQuantityInput2'
-                  name='quantity'
-                  value={quanValue}
-                  onChange={handleNumberChange}
-                  maxLength='3'
-                />
-                <button id="increment" type="button" onClick={handleQIncrement}>+</button>
-              </div>
-            </div>
-            <div className="formImage">
-              <img src={originImg} alt="coffee plantation"/>
-            </div>
-            <div className="breakLine3">
-              <svg xmlns="http://www.w3.org/2000/svg" width="525" height="2" viewBox="0 0 525 2" fill="none">
-                <path d="M525 1L9.53674e-07 1" stroke="#857E75"/>
-              </svg>
-            </div>
-            
-            <div className="btn2">
-              <button className={`${saveValue ? "saveFormButton" : "disabledButton"}`} id="formSaveButton" type="submit" onClick={props.formSubmissionHandler}><span className="buttonTextSolid">{props.buttonText}</span></button>
-            </div>
-            <div className="btn1">
-              <button className="cancelFormButton" id="formCancelButton" type="button" onClick={props.onClickingCancel}><span className="buttonText">Cancel</span></button>
-            </div>
-          </div>
-        </form>
+          </form>
+        </div>
       </div>
     </React.Fragment>
   );

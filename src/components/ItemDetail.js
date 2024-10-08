@@ -49,6 +49,9 @@ function ItemDetail(props) {
     <React.Fragment>
       <div className="detail-widget">
         <div className="details">
+          <h1 className="mobileNameDetail cardHeader" >{item.name}</h1>
+          <div className="detailLineContainerA"></div>
+          <div className="detailLineContainerB"></div>
           <div className="detailContent">
             <Item 
               name={item.name}
@@ -65,11 +68,14 @@ function ItemDetail(props) {
             />
           </div>
           <div className="detailPriceContainer">  
-            <h3 className="cardSubHead" id="detailQuantity">available:&nbsp;&nbsp;<span className="subHeadText">{item.quantity} lbs</span></h3>
-            <h3 className="cardSubHead" id="detailPriceSubhead">price per pound:&nbsp;&nbsp;<span className="cardPrice">${item.price}</span></h3>
+            <h3 className="cardSubHead" id="detailQuantity">available:&nbsp;&nbsp;<span className="subHeadText" id="detailQuantitySpan">{item.quantity} lbs</span></h3>
+            <h3 className="cardSubHead" id="detailPriceSubhead">price per pound:&nbsp;&nbsp;<span className="cardPrice" id="detailPriceSpan">${item.price}</span></h3>
           </div>
           <div className="detailFlagContainer" id="detailFlagImg" >
             <img className="flag" src={props.countryList[props.countryList.findIndex(country => country.origin === item.origin)].flag} alt="coffee plantation in Colombia" />
+          </div>
+          <div className="detailImgContainerNrw">
+            <img className="detailImgNrw" src={props.countryList[props.countryList.findIndex(country => country.origin === item.origin)].cpImg} alt="coffee plantation in Colombia" />
           </div>
 
           <div className="addCartContainer">

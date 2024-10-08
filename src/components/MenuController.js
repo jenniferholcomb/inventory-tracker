@@ -1,4 +1,5 @@
 import React from "react";
+import { withHooksHOC } from './withHooksHOC';
 import Header from './Header';
 import EditItemForm from "./EditItemForm";
 import ItemDetail from "./ItemDetail";
@@ -53,6 +54,7 @@ class MenuController extends React.Component {
   handleCartClick = () => {
     this.setState(prevState => ({
       cartVisible: !prevState.cartVisible,
+      menuBarVisible: false
     }));
   }
 
@@ -216,6 +218,7 @@ class MenuController extends React.Component {
   }
 
   render() {
+    const { screenChange } = this.props;
     return (
       <React.Fragment>
         <div className="appContainer">
@@ -225,12 +228,17 @@ class MenuController extends React.Component {
             <Header /> 
           </div>
           <div className="centerPageBottom">
-            <React.Fragment>
-              <ItemsList itemsList={ this.state.itemsList } 
-                        onItemSelection={ this.handleChangingSelectedItem } 
-                        countryList={ this.state.countryList } />
+            {
+              screenChange && this.state.selectedItem !== null ? 
+                null
+              : 
+                <React.Fragment>
+                  <ItemsList itemsList={ this.state.itemsList } 
+                            onItemSelection={ this.handleChangingSelectedItem } 
+                            countryList={ this.state.countryList } />
 
-            </React.Fragment>
+                </React.Fragment>
+            }
           </div>
           {
             this.state.cartVisible ?
@@ -267,10 +275,12 @@ class MenuController extends React.Component {
             :
             this.state.editItemFormVisible ?
               <React.Fragment>
-                <div className="closeIcon"> 
-                  <img src={closeIcon} onClick={ this.handleEditClick } alt="close icon"/>
-                </div>
                 <div className="container-details">
+                  <div className="closeIconWindow" onClick={ this.handleEditClick } alt="close icon"> 
+                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24">
+                      <path d="M3.13341 23.0834L0.916748 20.8667L9.78341 12L0.916748 3.13335L3.13341 0.916687L12.0001 9.78335L20.8667 0.916687L23.0834 3.13335L14.2167 12L23.0834 20.8667L20.8667 23.0834L12.0001 14.2167L3.13341 23.0834Z" />
+                    </svg>
+                  </div>
                   <EditItemForm item={ this.state.selectedItem }
                                 countryList={ this.state.countryList }
                                 onEditingItem={ this.handleEditingItem } 
@@ -283,8 +293,10 @@ class MenuController extends React.Component {
               <React.Fragment>
               
                 <div className="container-details">
-                  <div className="closeIcon"> 
-                    <img src={closeIcon} onClick={ this.handleReturningToList } alt="close icon"/>
+                  <div className="closeIconWindow" onClick={ this.handleReturningToList } alt="close icon"> 
+                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24">
+                      <path d="M3.13341 23.0834L0.916748 20.8667L9.78341 12L0.916748 3.13335L3.13341 0.916687L12.0001 9.78335L20.8667 0.916687L23.0834 3.13335L14.2167 12L23.0834 20.8667L20.8667 23.0834L12.0001 14.2167L3.13341 23.0834Z" />
+                    </svg>
                   </div>
                   <ItemDetail item={ this.state.selectedItem }
                               countryList={ this.state.countryList }
@@ -297,10 +309,12 @@ class MenuController extends React.Component {
             :
             this.state.newItemFormVisible ?
               <React.Fragment>
-                <div className="closeIcon"> 
-                  <img src={closeIcon} onClick={ this.handleClick } alt="close icon"/>
-                </div>
                 <div className="container-details">
+                  <div className="closeIconWindow" onClick={ this.handleClick } alt="close icon"> 
+                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24">
+                      <path d="M3.13341 23.0834L0.916748 20.8667L9.78341 12L0.916748 3.13335L3.13341 0.916687L12.0001 9.78335L20.8667 0.916687L23.0834 3.13335L14.2167 12L23.0834 20.8667L20.8667 23.0834L12.0001 14.2167L3.13341 23.0834Z" />
+                    </svg>
+                  </div>
                   <NewItemForm onNewItemCreation={ this.handleAddingNewItem } 
                                onClickingCancel={this.handleClick}
                                countryList={ this.state.countryList } />
@@ -331,7 +345,7 @@ class MenuController extends React.Component {
             :
               null
           }
-          <div  className="menuIconContainer">
+          <div className="menuIconContainer">
             {
               this.state.menuBarVisible ?
                 <React.Fragment>
@@ -340,15 +354,14 @@ class MenuController extends React.Component {
                   </div>
                     <ul className="menuContent">
                       <li className="menuList" onClick={this.handleCartClick}>cart</li>
-                      <li className="menuList" >products</li>
+                      <li className="menuList" onClick={this.handleMenuClick}>products</li>
                       <li className="listContainer"><h3 className="menuList" title="I'm static - checkout 'cart' or '+add new bean' below">shop</h3></li>
                       <li className="menuList" title="I'm static - checkout 'cart' or '+add new bean' below">about us</li>
                       <li className="menuList" title="I'm static - checkout 'cart' or '+add new bean' below">contact</li>
                     </ul>
-                 
-                  <div className="inventory-widget"> </div>
-                  <InventoryWidget itemsList={ this.state.itemsList } 
-                                   onAddBeanClick={ this.handleAddBeanClick } />
+                    <div className="inventory-widget"> </div>
+                    <InventoryWidget itemsList={ this.state.itemsList } 
+                                    onAddBeanClick={ this.handleAddBeanClick } />
                 </React.Fragment>
                 
               : 
@@ -379,4 +392,4 @@ class MenuController extends React.Component {
   }  
 }
 
-export default MenuController;
+export default withHooksHOC(MenuController);
