@@ -39,6 +39,8 @@ function CartItem(props) {
   return (
     <React.Fragment>
       <div className="cartItemContainer">
+        <img src={item.plantImg} className="cartImgNrw" alt="coffee plantation from origin country" />
+
         <div className="cartItemDescription">
           <img src={item.plantImg} className="cartImg" alt="coffee plantation from origin country" />
           <div className="productContainer">

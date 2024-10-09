@@ -225,6 +225,7 @@ class MenuController extends React.Component {
           <div className="topNav"></div>
           <div className="leftPage"></div>
           <div className="centerPage"> 
+            <div className="centerGradient"></div>
             <Header /> 
           </div>
           <div className="centerPageBottom">
@@ -244,9 +245,11 @@ class MenuController extends React.Component {
             this.state.cartVisible ?
               <React.Fragment>
                 <div className="container-details">
-                  <div className="closeIcon"> 
-                    <img src={closeIcon} onClick={ this.handleCartClick } alt="close icon"/>
-                  </div>
+                  <div className="closeIconWindow" onClick={ this.handleCartClick } alt="close icon"> 
+                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24">
+                      <path d="M3.13341 23.0834L0.916748 20.8667L9.78341 12L0.916748 3.13335L3.13341 0.916687L12.0001 9.78335L20.8667 0.916687L23.0834 3.13335L14.2167 12L23.0834 20.8667L20.8667 23.0834L12.0001 14.2167L3.13341 23.0834Z" />
+                    </svg>
+                  </div> 
                   <Cart cartList={this.state.cartItems}
                         onEditingCartItem={this.handleCartQuantityUpdate}
                         onRemovingCartItem={this.handleCartItemDelete}
@@ -258,7 +261,7 @@ class MenuController extends React.Component {
             :
             this.state.newItemAddedSuccessful || this.state.deleteWarningVisible || this.state.checkoutCompleteVisible ?
               <React.Fragment>
-                <div className="container-details">
+                <div className="container-details" id="popupStyle">
                   <div className="deleteWarning">
                     <p className="deleteWarningText">{ this.state.deleteWarningVisible ? `Are you sure you want to delete ${this.state.selectedItem.name}?` : this.state.newItemAddedSuccessful ? `You've successfully added ${this.state.itemsList[this.state.itemsList.length - 1].name}.` : 'Purchase successfull. Thanks for shopping.' }</p>
                     <div className="deleteWdgButtons">
@@ -334,7 +337,7 @@ class MenuController extends React.Component {
             </div> */}
           </div>
           <div className="footer">
-            <h4 className="footerText">Crafted with care, from earth to cup</h4>
+            <h4 className="footerText">Crafted with care, <span className="footerBreak"><br /></span>from soil to cup </h4>
           </div>
           {
             this.state.menuBarVisible ?
