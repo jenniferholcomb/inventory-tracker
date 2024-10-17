@@ -1,5 +1,4 @@
 import React from "react";
-import lineArt from "./../img/lines.svg"
 import PropTypes from 'prop-types';
 
 function Item(props) {

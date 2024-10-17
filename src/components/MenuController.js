@@ -9,14 +9,14 @@ import InventoryWidget from "./InventoryWidget";
 import Cart from "./Cart";
 import { v4 } from 'uuid';
 
-import colImg from "./../img/colombiaImg.png";
-import colImgNo from "./../img/ccpNo.png";
+import colImg from "./../img/colombiaBag.png";
+import colImgNo from "./../img/colombiaBagNoName.png";
 import colFlag from "./../img/colombiaFlag.png";
-import brazilImg from "./../img/cp.png";
+import brazilImg from "./../img/brazilBag.png";
 import brazilFlag from "./../img/brazilFlag.png";
-import indiaImg from "./../img/icp.png";
+import indiaImg from "./../img/indiaBag.png";
 import indiaFlag from "./../img/indiaFlag.png";
-import philImg from "./../img/pcp.png";
+import philImg from "./../img/philBag.png";
 import philFlag from "./../img/philFlag.png";
 import closeIcon from "./../img/closeIcon.png";
 
